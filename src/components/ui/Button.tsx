@@ -1,0 +1,52 @@
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { cn } from '../../utils/cn';
+
+type Variant = 'primary' | 'secondary' | 'outline' | 'danger' | 'ghost';
+type Size = 'sm' | 'md' | 'lg';
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: Variant;
+  size?: Size;
+  fullWidth?: boolean;
+  icon?: ReactNode;
+}
+
+const VARIANTS: Record<Variant, string> = {
+  primary: 'bg-primary text-primaryText hover:bg-primaryDark disabled:opacity-40',
+  secondary: 'bg-surfaceAlt text-textPrimary hover:bg-white/10 disabled:opacity-40',
+  outline: 'bg-transparent text-textPrimary border border-border hover:bg-white/5 disabled:opacity-40',
+  danger: 'bg-danger text-white hover:bg-red-600 disabled:opacity-40',
+  ghost: 'bg-transparent text-textSecondary hover:text-textPrimary disabled:opacity-40',
+};
+
+const SIZES: Record<Size, string> = {
+  sm: 'h-9 px-3 text-sm',
+  md: 'h-12 px-4 text-sm',
+  lg: 'h-14 px-6 text-base',
+};
+
+export default function Button({
+  variant = 'primary',
+  size = 'md',
+  fullWidth,
+  icon,
+  className,
+  children,
+  ...rest
+}: Props) {
+  return (
+    <button
+      className={cn(
+        'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-colors',
+        VARIANTS[variant],
+        SIZES[size],
+        fullWidth && 'w-full',
+        className,
+      )}
+      {...rest}
+    >
+      {icon}
+      {children}
+    </button>
+  );
+}

@@ -1,0 +1,141 @@
+import { useState, type FormEvent } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ChevronDown, Lock, LogOut, User, Wallet as WalletIcon } from 'lucide-react';
+import { useAuth } from '../../features/auth/context/useAuth';
+import Modal from '../ui/Modal';
+import Input from '../ui/Input';
+import Button from '../ui/Button';
+
+// Demo-only display name (the app has no separate "name" field yet — only an SO ID).
+const SO_DISPLAY_NAME = 'SO name displayed';
+
+export default function TopBar() {
+  const [open, setOpen] = useState(false);
+  const [changePwOpen, setChangePwOpen] = useState(false);
+  const [currentPw, setCurrentPw] = useState('');
+  const [newPw, setNewPw] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+  const [pwError, setPwError] = useState('');
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const closeChangePw = () => {
+    setChangePwOpen(false);
+    setCurrentPw('');
+    setNewPw('');
+    setConfirmPw('');
+    setPwError('');
+  };
+
+  const handleUpdatePassword = (e: FormEvent) => {
+    e.preventDefault();
+    if (newPw.length < 6) {
+      setPwError('New password must be at least 6 characters.');
+      return;
+    }
+    if (newPw !== confirmPw) {
+      setPwError('New password and confirmation do not match.');
+      return;
+    }
+    closeChangePw();
+  };
+
+  return (
+    <header className="flex items-center justify-between border-b border-border bg-background px-4 py-3 lg:px-8 lg:py-4">
+      <Link to="/" className="flex items-center gap-2">
+        <img src="/pwa-192.png" alt="" className="hidden" />
+        <span className="text-xl font-black tracking-tight text-primary">PERYAPLAY</span>
+      </Link>
+
+      <div className="flex items-center gap-3">
+        <div className="flex h-10 items-center gap-2 rounded-full bg-primary px-4 font-bold text-primaryText">
+          <WalletIcon size={16} />
+          <span>₱ {user?.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+        </div>
+
+        <div className="relative">
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="flex h-10 items-center gap-1 rounded-full bg-primary px-2.5 text-primaryText"
+          >
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black/10">
+              <User size={14} />
+            </span>
+            <ChevronDown size={14} className={open ? 'rotate-180 transition-transform' : 'transition-transform'} />
+          </button>
+
+          {open && (
+            <>
+              <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
+              <div className="absolute right-0 top-12 z-20 w-60 rounded-xl border border-border bg-surfaceAlt p-2 shadow-xl">
+                <div className="px-3 py-3">
+                  <div className="font-bold text-textPrimary">{SO_DISPLAY_NAME}</div>
+                  <div className="text-xs text-textMuted">SO ID {user?.soId}</div>
+                </div>
+                <div className="my-1 h-px bg-border" />
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    setChangePwOpen(true);
+                  }}
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-textPrimary hover:bg-white/5"
+                >
+                  <Lock size={16} /> Change Password
+                </button>
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    logout();
+                    navigate('/login');
+                  }}
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-danger hover:bg-danger/10"
+                >
+                  <LogOut size={16} /> Logout
+                </button>
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+
+      <Modal
+        open={changePwOpen}
+        onClose={closeChangePw}
+        title="Change Password"
+        className="bg-surfaceAlt text-textPrimary"
+      >
+        <form onSubmit={handleUpdatePassword} className="flex flex-col gap-5">
+          <Input
+            label="Current Password"
+            type="password"
+            value={currentPw}
+            onChange={(e) => setCurrentPw(e.target.value)}
+          />
+          <Input
+            label="New Password"
+            type="password"
+            placeholder="At least 6 characters"
+            value={newPw}
+            onChange={(e) => setNewPw(e.target.value)}
+          />
+          <Input
+            label="Confirm New Password"
+            type="password"
+            placeholder="Re-enter new password"
+            value={confirmPw}
+            onChange={(e) => setConfirmPw(e.target.value)}
+          />
+          {pwError && <p className="text-sm font-semibold text-danger">{pwError}</p>}
+          <div className="flex gap-3">
+            <Button type="button" variant="outline" fullWidth onClick={closeChangePw}>
+              Cancel
+            </Button>
+            <Button type="submit" fullWidth className="shadow-[0_0_24px_rgba(242,185,62,0.35)]">
+              Update
+            </Button>
+          </div>
+        </form>
+      </Modal>
+    </header>
+  );
+}
