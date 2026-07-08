@@ -8,26 +8,55 @@ interface Props {
 }
 
 const SIZES = {
-  sm: 'h-8 w-8 text-[10px]',
-  md: 'h-11 w-11 text-xs',
-  lg: 'h-14 w-14 text-sm',
+  sm: {
+    outer: 'h-8 w-8',
+    inner: 'h-5 w-5',
+    text: 'text-[8px]',
+  },
+  md: {
+    outer: 'h-12 w-12',
+    inner: 'h-8 w-8',
+    text: 'text-[11px]',
+  },
+  lg: {
+    outer: 'h-14 w-14',
+    inner: 'h-10 w-10',
+    text: 'text-sm',
+  },
 };
 
-export default function ColorBadge({ code, size = 'md', className }: Props) {
+export default function ColorBadge({
+  code,
+  size = 'md',
+  className,
+}: Props) {
   const entry = ENTRY_COLORS[code];
+
   if (!entry) return null;
+
+  const s = SIZES[size];
 
   return (
     <div
       className={cn(
-        'flex shrink-0 items-center justify-center rounded-full border-2 border-white/10 font-bold',
-        SIZES[size],
-        entry.dark ? 'text-black/70' : 'text-white',
+        'flex shrink-0 items-center justify-center rounded-full shadow-[0_3px_8px_rgba(0,0,0,0.45)]',
+        s.outer,
         className,
       )}
-      style={{ backgroundColor: entry.hex }}
+      style={{
+        background: `radial-gradient(circle at 28% 28%, ${entry.light} 0%, ${entry.base} 72%, ${entry.base} 100%)`,
+      }}
     >
-      {code}
+      <div
+        className={cn(
+          'flex items-center justify-center rounded-full bg-white font-black shadow-[inset_0_1px_3px_rgba(0,0,0,0.12)]',
+          s.inner,
+          s.text,
+          entry.dark ? 'text-neutral-700' : 'text-neutral-900',
+        )}
+      >
+        {code}
+      </div>
     </div>
   );
 }

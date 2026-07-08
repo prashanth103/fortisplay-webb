@@ -24,16 +24,55 @@ export const COLORS = {
 };
 
 // Colored "entry" badges used for race participants (color-coded balls).
-export const ENTRY_COLORS: Record<string, { hex: string; name: string; dark?: boolean }> = {
-  YW: { hex: '#F2C230', name: 'Yellow', dark: true },
-  LG: { hex: '#3FAE4A', name: 'Light Green' },
-  OR: { hex: '#E8792B', name: 'Orange' },
-  RD: { hex: '#E1393B', name: 'Red' },
-  VT: { hex: '#8E3FD1', name: 'Violet' },
-  PK: { hex: '#EC7FB2', name: 'Pink' },
-  IV: { hex: '#E7DFC6', name: 'Ivory', dark: true },
-  SB: { hex: '#5AB9E8', name: 'Sky Blue' },
-  SV: { hex: '#C9CDD1', name: 'Silver', dark: true },
+export const ENTRY_COLORS = {
+  YW: {
+    base: '#F0C419',
+    light: '#FFD94D',
+    name: 'Yellow',
+    dark: true,
+  },
+  LG: {
+    base: '#5AAE34',
+    light: '#8EDB60',
+    name: 'Light Green',
+  },
+  OR: {
+    base: '#E46A22',
+    light: '#FFA160',
+    name: 'Orange',
+  },
+  RD: {
+    base: '#D72626',
+    light: '#FF6464',
+    name: 'Red',
+  },
+  VT: {
+    base: '#8B2BB9',
+    light: '#BF6EF2',
+    name: 'Violet',
+  },
+  PK: {
+    base: '#E57DB4',
+    light: '#F9BDD8',
+    name: 'Pink',
+  },
+  IV: {
+    base: '#DDD3B6',
+    light: '#F6F1E5',
+    name: 'Ivory',
+    dark: true,
+  },
+  SB: {
+    base: '#63B6E8',
+    light: '#B6E4FF',
+    name: 'Sky Blue',
+  },
+  SV: {
+    base: '#B9BDC2',
+    light: '#EEF1F5',
+    name: 'Silver',
+    dark: true,
+  },
 };
 
 export type PoolKey = 'WIN' | 'FORECAST' | 'TRIFECTA' | 'QUARTET';

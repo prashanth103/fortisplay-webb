@@ -26,11 +26,21 @@ export default function SelectableRow({ entry, selected, selectionIndex, onToggl
         onClick={onToggle}
         aria-pressed={selected}
         className={cn(
-          'flex h-9 w-9 items-center justify-center rounded-lg border font-bold transition-colors',
-          selected ? 'border-primary bg-primary text-primaryText' : 'border-border text-textSecondary hover:border-primary/60',
+          'flex h-12 w-12 items-center justify-center rounded-xl border-2 transition-all duration-200',
+          selected
+            ? 'border-primary bg-primary text-primaryText'
+            : 'border-[#E4B83F] bg-[#3B3220] text-white hover:bg-[#463A24]'
         )}
       >
-        {selected ? (selectionIndex ? selectionIndex : <Check size={16} />) : <Plus size={16} />}
+        {selected ? (
+          selectionIndex ? (
+            <span className="text-base font-bold">{selectionIndex}</span>
+          ) : (
+            <Check size={20} strokeWidth={3} />
+          )
+        ) : (
+          <Plus size={26} strokeWidth={2.5} />
+        )}
       </button>
     </div>
   );
