@@ -17,24 +17,26 @@ export default function Modal({ open, onClose, title, children, footer, classNam
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/70" onClick={onClose} />
-      <div
-        className={cn(
-          'relative z-10 w-full max-w-md rounded-2xl bg-surfaceLight text-textOnLight shadow-2xl',
-          className,
-        )}
-      >
-        <div className="flex items-center justify-between px-6 pt-6">
-          <h2 className="text-xl font-bold">{title}</h2>
-          <button
-            onClick={onClose}
-            className="flex h-9 w-9 items-center justify-center rounded-lg bg-black/5 hover:bg-black/10"
-            aria-label="Close"
-          >
-            <X size={18} />
-          </button>
+      <div className="relative z-10 flex w-full max-w-md flex-col gap-4">
+        <div
+          className={cn(
+            'w-full rounded-2xl bg-surfaceLight text-textOnLight shadow-2xl',
+            className,
+          )}
+        >
+          <div className="flex items-center justify-between px-6 pt-6">
+            <h2 className="text-xl font-bold">{title}</h2>
+            <button
+              onClick={onClose}
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-black/5 hover:bg-black/10"
+              aria-label="Close"
+            >
+              <X size={18} />
+            </button>
+          </div>
+          <div className="px-6 py-6">{children}</div>
         </div>
-        <div className="px-6 py-6">{children}</div>
-        {footer && <div className="flex gap-3 border-t border-black/10 px-6 py-4">{footer}</div>}
+        {footer && <div className="flex gap-3">{footer}</div>}
       </div>
     </div>
   );

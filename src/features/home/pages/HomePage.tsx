@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Video, X } from 'lucide-react';
+import { Lock, Printer, Video, X } from 'lucide-react';
 import ScreenContainer from '../../../components/layout/ScreenContainer';
 import RaceTabs from '../../../components/common/RaceTabs';
 import SelectableRow from '../../../components/common/SelectableRow';
@@ -16,6 +16,7 @@ import TicketQR from '../../../components/common/TicketQR';
 import { ENTRIES, RACES } from '../mock';
 import { POOLS, type PoolKey } from '../../../constants/theme';
 import type { Entry } from '../../../types/betting';
+import TicketDivider from '../../../components/common/TicketDivider';
 
 function randomTicketNo() {
   return Math.random().toString(36).slice(2, 12).padStart(10, '0');
@@ -183,7 +184,7 @@ export default function HomePage() {
         title="Confirm Bet"
         footer={
           <>
-            <Button variant="outline" fullWidth className="!border-black/15 !text-textOnLight" onClick={() => setConfirmOpen(false)}>
+            <Button variant="outline" fullWidth className="!border-white/15 !text-white" onClick={() => setConfirmOpen(false)}>
               Cancel
             </Button>
             <Button fullWidth onClick={placeBet}>
@@ -193,11 +194,12 @@ export default function HomePage() {
         }
       >
         <div className="flex flex-col items-center gap-4">
-          <span className="rounded-full bg-black px-4 py-1.5 text-xs font-bold text-primary">
-            {activeRace.id} · Race {activeRace.raceNo}
+          <span className="rounded-full bg-black px-4 py-1.5 text-sm font-bold text-primary">
+            {activeRace.id} · RACE {activeRace.raceNo}
           </span>
           <TicketQR seed={`${activeRace.id}-${pool}-${selections.map((e) => e.code).join('')}`} />
-          <div className="flex w-full items-center justify-between border-t border-black/10 pt-4 text-center">
+          <TicketDivider />
+          <div className="flex w-full items-center justify-between text-center">
             <div>
               <div className="text-sm font-bold text-primaryDark">{poolMeta.label}</div>
               <div className="text-xs text-black/40">Pool</div>
@@ -205,7 +207,7 @@ export default function HomePage() {
             <div className="flex flex-col items-center gap-1">
               <div className="flex gap-1">
                 {selections.map((e) => (
-                  <ColorBadge key={e.code} code={e.code} />
+                  <ColorBadge key={e.code} code={e.code} size="lg" />
                 ))}
               </div>
               <div className="text-sm font-bold uppercase">{selections.map((e) => e.name).join(' / ')}</div>
@@ -215,7 +217,8 @@ export default function HomePage() {
               <div className="text-xs text-black/40">Order</div>
             </div>
           </div>
-          <div className="flex w-full items-center justify-between border-t border-black/10 pt-4">
+          <TicketDivider />
+          <div className="flex w-full items-center justify-between">
             <span className="font-bold">Total Amount</span>
             <span className="rounded-lg border border-primary px-3 py-1 font-bold text-primaryDark">₱{stake}</span>
           </div>
@@ -228,10 +231,10 @@ export default function HomePage() {
         title="Ticket"
         footer={
           <>
-            <Button variant="outline" fullWidth className="!border-black/15 !text-textOnLight" onClick={() => setTicket(null)}>
+            <Button variant="outline" fullWidth className="!border-white/15 !text-white" onClick={() => setTicket(null)}>
               Close
             </Button>
-            <Button fullWidth icon={<span>🖨️</span>}>
+            <Button fullWidth icon={<Printer size={16} />}>
               Print Ticket
             </Button>
           </>
@@ -242,7 +245,8 @@ export default function HomePage() {
             <span className="rounded-full bg-black px-4 py-1.5 text-xs font-bold text-primary">KB · FIXED ODDS</span>
             <TicketQR seed={ticket.id} />
             <p className="text-sm text-black/60">No. {ticket.id}</p>
-            <div className="w-full space-y-3 border-t border-black/10 pt-4 text-sm">
+            <TicketDivider />
+            <div className="w-full space-y-3 text-sm">
               <Row label="Date" value={new Date().toLocaleString()} />
               <Row label="Pool" value={ticket.pool} />
               <Row label="Order Preference" value="EXACT" />
