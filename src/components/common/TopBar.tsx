@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ChevronDown, Lock, LogOut, User, Wallet as WalletIcon } from 'lucide-react';
 import { useAuth } from '../../features/auth/context/useAuth';
 import Modal from '../ui/Modal';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
+import logo from '../../assets/images/logo.png';
 
 // Demo-only display name (the app has no separate "name" field yet — only an SO ID).
 const SO_DISPLAY_NAME = 'SO name displayed';
@@ -42,10 +43,13 @@ export default function TopBar() {
 
   return (
     <header className="flex items-center justify-between border-b border-border bg-background px-4 py-3 lg:px-8 lg:py-4">
-      <Link to="/" className="flex items-center gap-2">
-        <img src="/pwa-192.png" alt="" className="hidden" />
-        <span className="text-xl font-black tracking-tight text-primary">PERYAPLAY</span>
-      </Link>
+      <div className="mb-2 flex items-center justify-center">
+        <img
+          src={logo}
+          alt="PeryaPlay Logo"
+          className="h-9 w-auto object-contain"
+        />
+      </div>
 
       <div className="flex items-center gap-3">
         <div className="flex h-10 items-center gap-2 rounded-full bg-primary px-4 font-bold text-primaryText">
