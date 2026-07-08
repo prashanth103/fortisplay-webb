@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { cn } from '../../utils/cn';
 
 interface Props {
+  badge?: ReactNode;
   icon?: ReactNode;
   title: string;
   description?: string;
@@ -10,13 +11,14 @@ interface Props {
   className?: string;
 }
 
-export default function EmptyState({ icon, title, description, action, tone = 'default', className }: Props) {
+export default function EmptyState({ badge, icon, title, description, action, tone = 'default', className }: Props) {
   return (
-    <div className={cn('flex flex-col items-center justify-center px-6 py-16 text-center', className)}>
+    <div className={cn('flex flex-col items-center justify-center px-6 py-20 text-center lg:py-16', className)}>
+      {badge && <div className="mb-5">{badge}</div>}
       {icon && (
         <div
           className={cn(
-            'mb-5 flex h-16 w-16 items-center justify-center rounded-full',
+            'mb-5 flex h-20 w-20 items-center justify-center rounded-full lg:h-16 lg:w-16',
             tone === 'danger' ? 'bg-danger/10 text-danger' : 'bg-white/5 text-textSecondary',
           )}
         >

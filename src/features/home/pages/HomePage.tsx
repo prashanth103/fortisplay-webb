@@ -126,6 +126,11 @@ export default function HomePage() {
           {activeRace.status === 'live' && (
             <Card className="border-danger/50">
               <EmptyState
+                badge={
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-danger/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-danger">
+                    <span className="h-1.5 w-1.5 rounded-full bg-danger" /> Live Now
+                  </span>
+                }
                 icon={<Lock size={28} />}
                 title="Bets Closed"
                 description={`Betting for ${activeRace.id} is now closed. The race is underway — watch it live.`}
