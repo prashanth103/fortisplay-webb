@@ -13,6 +13,11 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
 
+      devOptions: {
+        enabled: true,
+        type: 'module',
+      },
+
       manifest: {
         name: 'PeryaPlay',
         short_name: 'PeryaPlay',
