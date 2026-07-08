@@ -1,9 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Lock, TicketCheck, User } from 'lucide-react';
+import { Eye, EyeOff, Lock, User } from 'lucide-react';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 import { useAuth } from '../context/useAuth';
+import logo from '../../../assets/images/logo.png';
 
 export default function LoginPage() {
   const [soId, setSoId] = useState('400001');
@@ -25,11 +26,14 @@ export default function LoginPage() {
   return (
     <div className="w-full max-w-sm lg:max-w-md">
       <div className="mb-8 flex flex-col items-center text-center">
-        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-primaryText">
-          <TicketCheck size={32} />
+        <div className="mb-1 flex items-center justify-center">
+          <img
+            src={logo}
+            alt="PeryaPlay Logo"
+            className="h-20 w-auto object-contain"
+          />
         </div>
-        <h1 className="text-2xl font-black tracking-tight text-primary">PERYAPLAY</h1>
-        <h2 className="mt-4 text-2xl font-bold text-textPrimary">Welcome back</h2>
+        <h2 className="mt-1 text-2xl font-bold text-textPrimary">Welcome back</h2>
         <p className="mt-1 text-sm text-textSecondary">Sign in to your gaming station</p>
       </div>
 
