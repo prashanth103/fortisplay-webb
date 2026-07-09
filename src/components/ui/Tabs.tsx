@@ -15,7 +15,7 @@ interface Props {
 
 export default function Tabs({ items, value, onChange, className }: Props) {
   return (
-    <div className={cn('flex rounded-t-xl bg-surfaceAlt', className)}>
+    <div className={cn('flex rounded-t-xl border-t-3 border-primary bg-surfaceAlt', className)}>
       {items.map((item) => {
         const active = item.key === value;
         return (
@@ -24,7 +24,7 @@ export default function Tabs({ items, value, onChange, className }: Props) {
             onClick={() => onChange(item.key)}
             className={cn(
               'flex-1 border-b-2 px-3 py-3 text-left transition-colors',
-              active ? 'border-primary bg-black/20' : 'border-transparent hover:bg-white/5',
+              active ? 'border-b-2 border-primary bg-black/20' : 'border-b-2 border-transparent hover:bg-white/5',
             )}
           >
             <div className={cn('text-sm font-bold', active ? 'text-primary' : 'text-textPrimary')}>

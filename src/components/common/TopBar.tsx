@@ -42,30 +42,41 @@ export default function TopBar() {
   };
 
   return (
-    <header className="flex items-center justify-between border-b border-border bg-background px-4 py-3 lg:px-8 lg:py-4">
-      <div className="mb-2 flex items-center justify-center">
-        <img
-          src={logo}
-          alt="PeryaPlay Logo"
-          className="h-9 w-auto object-contain"
-        />
-      </div>
+    <header className="flex w-full items-center justify-between border-b border-border bg-background px-5 py-4">
+      {/* Logo */}
+      <img
+        src={logo}
+        alt="PeryaPlay Logo"
+        className="h-10 w-auto object-contain shrink-0"
+      />
 
+      {/* Right */}
       <div className="flex items-center gap-3">
         <div className="flex h-10 items-center gap-2 rounded-full bg-primary px-4 font-bold text-primaryText">
           <WalletIcon size={16} />
           <span>₱ {user?.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
         </div>
 
+        {/* Profile */}
         <div className="relative">
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 items-center gap-1 rounded-full bg-primary px-2.5 text-primaryText"
+            className="flex h-10 items-center rounded-full bg-[#2B2B2B] pl-1 pr-2 shadow-sm"
           >
-            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black/10">
-              <User size={14} />
-            </span>
-            <ChevronDown size={14} className={open ? 'rotate-180 transition-transform' : 'transition-transform'} />
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
+              <User
+                size={18}
+                strokeWidth={2.2}
+                className="text-primaryText"
+              />
+            </div>
+
+            <ChevronDown
+              size={22}
+              strokeWidth={2.5}
+              className={`ml-1 text-[#8F8F8F] transition-transform ${open ? 'rotate-180' : ''
+                }`}
+            />
           </button>
 
           {open && (
