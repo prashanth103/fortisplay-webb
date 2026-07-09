@@ -4,7 +4,7 @@ import { cn } from '../../utils/cn';
 
 export default function BottomNav() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 flex border-t border-border bg-background lg:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-30 flex h-16 items-center border-t border-border bg-background lg:hidden">
       {NAVIGATION.map(({ label, path, icon: Icon }) => (
         <NavLink
           key={path}

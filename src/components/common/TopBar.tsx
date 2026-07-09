@@ -42,7 +42,7 @@ export default function TopBar() {
   };
 
   return (
-    <header className="flex w-full items-center justify-between border-b border-border bg-background px-5 py-4">
+    <header className="sticky top-0 z-50 flex w-full items-center justify-between border-b border-border bg-background px-5 py-4">
       {/* Logo */}
       <img
         src={logo}

@@ -6,9 +6,10 @@ interface Props {
   className?: string;
   /** Cap width like the mobile screens below lg, go wide above it (default). */
   wide?: boolean;
+  style?: React.CSSProperties;
 }
 
-export default function ScreenContainer({ children, className, wide = true }: Props) {
+export default function ScreenContainer({ children, className, wide = true, style }: Props) {
   return (
     <main
       className={cn(
@@ -16,6 +17,7 @@ export default function ScreenContainer({ children, className, wide = true }: Pr
         wide ? 'max-w-md lg:max-w-6xl' : 'max-w-md',
         className,
       )}
+      style={style}
     >
       {children}
     </main>
