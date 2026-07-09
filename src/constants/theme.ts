@@ -23,6 +23,24 @@ export const COLORS = {
   info: '#3FA9F5',
 };
 
+export const THEME_COLORS = {
+  dark: COLORS,
+  light: {
+    ...COLORS,
+    background: '#F7F8FA',
+    surface: '#FFFFFF',
+    surfaceAlt: '#F0F2F5',
+    surfaceLight: '#FFFFFF',
+    border: '#DDE1E7',
+    textPrimary: '#111827',
+    textSecondary: '#4B5563',
+    textMuted: '#7A828F',
+    textOnLight: '#111827',
+    cardIconBg: '#FFF2C8',
+    cardIcon: '#B77900',
+  },
+} as const;
+
 // Colored "entry" badges used for race participants (color-coded balls).
 export const ENTRY_COLORS = {
   YW: {
@@ -74,6 +92,8 @@ export const ENTRY_COLORS = {
     dark: true,
   },
 };
+
+export type EntryColorCode = keyof typeof ENTRY_COLORS;
 
 export type PoolKey = 'WIN' | 'FORECAST' | 'TRIFECTA' | 'QUARTET';
 

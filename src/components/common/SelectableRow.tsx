@@ -29,7 +29,7 @@ export default function SelectableRow({ entry, selected, selectionIndex, onToggl
           'flex h-12 w-12 items-center justify-center rounded-xl border-2 transition-all duration-200',
           selected
             ? 'border-primary bg-primary text-primaryText'
-            : 'border-[#E4B83F] bg-[#3B3220] text-white hover:bg-[#463A24]'
+            : 'border-primary/70 bg-surfaceAlt text-primary hover:bg-surface'
         )}
       >
         {selected ? (

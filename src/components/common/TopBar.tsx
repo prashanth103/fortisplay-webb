@@ -1,7 +1,8 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, Lock, LogOut, User, Wallet as WalletIcon } from 'lucide-react';
+import { ChevronDown, Lock, LogOut, Moon, Sun, User, Wallet as WalletIcon } from 'lucide-react';
 import { useAuth } from '../../features/auth/context/useAuth';
+import { useTheme } from '../../features/theme/ThemeContext';
 import Modal from '../ui/Modal';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
@@ -18,6 +19,7 @@ export default function TopBar() {
   const [confirmPw, setConfirmPw] = useState('');
   const [pwError, setPwError] = useState('');
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const closeChangePw = () => {
@@ -52,6 +54,16 @@ export default function TopBar() {
 
       {/* Right */}
       <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surfaceAlt text-textPrimary shadow-sm hover:bg-surface"
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+        >
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+        </button>
+
         <div className="flex h-10 items-center gap-2 rounded-full bg-primary px-4 font-bold text-primaryText">
           <WalletIcon size={16} />
           <span>₱ {user?.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
@@ -61,7 +73,7 @@ export default function TopBar() {
         <div className="relative">
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex h-10 items-center rounded-full bg-[#2B2B2B] pl-1 pr-2 shadow-sm"
+            className="flex h-10 items-center rounded-full border border-border bg-surfaceAlt pl-1 pr-2 shadow-sm"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary">
               <User
@@ -74,7 +86,7 @@ export default function TopBar() {
             <ChevronDown
               size={22}
               strokeWidth={2.5}
-              className={`ml-1 text-[#8F8F8F] transition-transform ${open ? 'rotate-180' : ''
+              className={`ml-1 text-textMuted transition-transform ${open ? 'rotate-180' : ''
                 }`}
             />
           </button>
@@ -93,7 +105,7 @@ export default function TopBar() {
                     setOpen(false);
                     setChangePwOpen(true);
                   }}
-                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-textPrimary hover:bg-white/5"
+                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-textPrimary hover:bg-surface"
                 >
                   <Lock size={16} /> Change Password
                 </button>

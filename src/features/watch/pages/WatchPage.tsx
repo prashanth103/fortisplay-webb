@@ -103,11 +103,11 @@ export default function WatchPage() {
                 onClick={() => setActiveId(race.id)}
                 className={cn(
                   'flex items-center justify-between rounded-xl border px-4 py-3 text-left transition-colors',
-                  race.id === activeId ? 'border-primary bg-primary/10' : 'border-border bg-surfaceAlt hover:bg-white/5',
+                  race.id === activeId ? 'border-primary bg-primary/10' : 'border-border bg-surfaceAlt hover:bg-surface',
                 )}
               >
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-14 items-center justify-center rounded-md bg-black/40 text-textMuted">
+                  <span className="flex h-10 w-14 items-center justify-center rounded-md bg-surface text-textMuted">
                     <Play size={16} />
                   </span>
                   <div>

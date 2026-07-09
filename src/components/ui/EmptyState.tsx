@@ -19,7 +19,7 @@ export default function EmptyState({ badge, icon, title, description, action, to
         <div
           className={cn(
             'mb-5 flex h-20 w-20 items-center justify-center rounded-full lg:h-16 lg:w-16',
-            tone === 'danger' ? 'bg-danger/10 text-danger' : 'bg-white/5 text-textSecondary',
+            tone === 'danger' ? 'bg-danger/10 text-danger' : 'bg-surfaceAlt text-textSecondary',
           )}
         >
           {icon}

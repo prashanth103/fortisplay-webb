@@ -16,7 +16,7 @@ export default function WalletPage() {
 
       <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
         <div className="xl:col-span-2">
-          <Card className="mb-4 flex items-center gap-4 border-none bg-[#151A2E] p-5">
+          <Card className="mb-4 flex items-center gap-4 p-5">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
               <TrendingUp size={22} />
             </div>
@@ -34,7 +34,7 @@ export default function WalletPage() {
               <div className="text-2xl font-bold">₱ {user?.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
               <div className="mt-1 text-xs font-bold uppercase tracking-wide">Cash In Hand</div>
             </Card>
-            <Card className="border-none bg-[#151A2E] p-5">
+            <Card className="p-5">
               <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
                 <Percent size={20} />
               </div>
@@ -121,7 +121,7 @@ function StatTile({
             ₱ {value}
           </div>
 
-          <div className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-black/40">
+          <div className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-textMuted">
             {label}
           </div>
         </div>

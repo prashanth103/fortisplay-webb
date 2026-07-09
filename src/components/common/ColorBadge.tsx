@@ -1,4 +1,4 @@
-import { ENTRY_COLORS } from '../../constants/theme';
+import { ENTRY_COLORS, type EntryColorCode } from '../../constants/theme';
 import { cn } from '../../utils/cn';
 
 interface Props {
@@ -25,14 +25,18 @@ const SIZES = {
   },
 };
 
+function isEntryColorCode(code: string): code is EntryColorCode {
+  return code in ENTRY_COLORS;
+}
+
 export default function ColorBadge({
   code,
   size = 'md',
   className,
 }: Props) {
-  const entry = ENTRY_COLORS[code];
+  if (!isEntryColorCode(code)) return null;
 
-  if (!entry) return null;
+  const entry = ENTRY_COLORS[code];
 
   const s = SIZES[size];
 
@@ -52,7 +56,7 @@ export default function ColorBadge({
           'flex items-center justify-center rounded-full bg-white font-black shadow-[inset_0_1px_3px_rgba(0,0,0,0.12)]',
           s.inner,
           s.text,
-          entry.dark ? 'text-neutral-700' : 'text-neutral-900',
+          'dark' in entry && entry.dark ? 'text-neutral-700' : 'text-neutral-900',
         )}
       >
         {code}

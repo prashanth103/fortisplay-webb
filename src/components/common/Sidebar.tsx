@@ -14,7 +14,7 @@ export default function Sidebar() {
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold transition-colors',
-                isActive ? 'bg-primary text-primaryText' : 'text-textSecondary hover:bg-white/5 hover:text-textPrimary',
+                isActive ? 'bg-primary text-primaryText' : 'text-textSecondary hover:bg-surfaceAlt hover:text-textPrimary',
               )
             }
           >

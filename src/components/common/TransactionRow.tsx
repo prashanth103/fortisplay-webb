@@ -21,7 +21,7 @@ export default function TransactionRow({ tx }: { tx: Transaction }) {
         <div className="lg:hidden">
           <div className="flex items-center gap-2 font-bold text-textPrimary">
             {tx.raceId} · {tx.pool}
-            <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-bold text-primary">{tx.order}</span>
+            <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold text-primaryDark">{tx.order}</span>
           </div>
           <div className="text-xs text-textMuted">
             No. {tx.id} · {tx.time}
@@ -31,7 +31,7 @@ export default function TransactionRow({ tx }: { tx: Transaction }) {
 
       <div className="hidden items-center gap-2 font-bold text-textPrimary lg:flex">
         {tx.raceId} · {tx.pool}
-        <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-bold text-primary">{tx.order}</span>
+        <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold text-primaryDark">{tx.order}</span>
       </div>
       <div className="hidden text-sm text-textMuted lg:block">
         No. {tx.id} · {tx.time}

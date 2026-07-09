@@ -46,7 +46,7 @@ export default function Sheet({ open, onClose = () => {}, title, badge, children
           </div>
           <button
             onClick={onClose}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-white/5 hover:bg-white/10"
+            className="flex h-8 w-8 items-center justify-center rounded-lg bg-surface hover:bg-border"
             aria-label="Close"
           >
             <X size={16} className="text-textSecondary" />

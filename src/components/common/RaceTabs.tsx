@@ -17,7 +17,7 @@ function RaceChip({ race, active, onClick }: ChipProps) {
       onClick={onClick}
       className={cn(
         'flex-1 rounded-xl px-4 py-3 text-left transition-colors lg:flex-none lg:min-w-[160px]',
-        active ? 'bg-primary text-primaryText' : 'bg-surfaceAlt text-textPrimary hover:bg-white/10',
+        active ? 'bg-primary text-primaryText' : 'bg-surfaceAlt text-textPrimary hover:bg-surface',
       )}
     >
       <div className="text-sm font-bold">

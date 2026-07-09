@@ -28,7 +28,7 @@ export default function Modal({ open, onClose, title, children, footer, classNam
             <h2 className="text-xl font-bold">{title}</h2>
             <button
               onClick={onClose}
-              className="flex h-9 w-9 items-center justify-center rounded-lg bg-black/5 hover:bg-black/10"
+              className="flex h-9 w-9 items-center justify-center rounded-lg bg-surfaceAlt text-textPrimary hover:bg-border"
               aria-label="Close"
             >
               <X size={18} />

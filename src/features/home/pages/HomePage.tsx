@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Lock, Printer, Video, X } from 'lucide-react';
+import { Lock, Printer, Video } from 'lucide-react';
 import ScreenContainer from '../../../components/layout/ScreenContainer';
 import RaceTabs from '../../../components/common/RaceTabs';
 import SelectableRow from '../../../components/common/SelectableRow';

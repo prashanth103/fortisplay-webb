@@ -7,7 +7,7 @@ interface Props {
 
 export default function StatCard({ label, value }: Props) {
   return (
-    <Card className="bg-[#151A2E] px-5 py-4">
+    <Card className="px-5 py-4">
       <div className="text-xs font-medium uppercase tracking-wide text-textSecondary">{label}</div>
       <div className="mt-1 text-2xl font-bold text-textPrimary">{value}</div>
     </Card>
