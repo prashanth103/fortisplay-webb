@@ -38,8 +38,8 @@ export default function PayoutsPage() {
 
       {!result ? (
         <div>
-          <button className="mx-auto flex aspect-square w-full max-w-[380px] items-center justify-center rounded-2xl border border-border bg-surfaceAlt">
-            <div className="relative flex h-2/3 w-2/3 items-center justify-center rounded-xl">
+          <button className="mx-auto flex aspect-square w-full max-w-[380px] items-center justify-center">
+            <div className="relative flex h-2/3 w-2/3 items-center justify-center rounded-xl border border-border bg-surfaceAlt">
               <span className="absolute left-0 top-0 h-8 w-8 rounded-tl-xl border-l-2 border-t-2 border-primary" />
               <span className="absolute right-0 top-0 h-8 w-8 rounded-tr-xl border-r-2 border-t-2 border-primary" />
               <span className="absolute bottom-0 left-0 h-8 w-8 rounded-bl-xl border-b-2 border-l-2 border-primary" />
@@ -48,9 +48,11 @@ export default function PayoutsPage() {
             </div>
           </button>
 
-          <Button fullWidth size="lg" className="mt-5" icon={<ScanLine size={18} />}>
-            Scan Ticket
-          </Button>
+          <div className="mt-5 flex justify-center">
+            <Button className="w-72" icon={<ScanLine size={16} />}>
+              Scan Ticket
+            </Button>
+          </div>
 
           <div className="my-5 flex items-center gap-3 text-xs font-bold uppercase tracking-wide text-textMuted">
             <span className="h-px flex-1 bg-border" /> Or enter ticket number <span className="h-px flex-1 bg-border" />
@@ -90,13 +92,16 @@ export default function PayoutsPage() {
             </div>
 
             <div className="flex items-center gap-3 border-t border-black/10 px-5 py-4">
-              <ColorBadge code={result.entryCode} size="lg" />
+              <ColorBadge
+                code={result.entryCode as 'YW' | 'LG' | 'OR' | 'RD' | 'VT' | 'PK' | 'IV' | 'SB' | 'SV'}
+                size="lg"
+              />
               <div>
                 <div className="flex items-center gap-2 font-bold">
                   {result.raceId} · {result.pool}
                   <span className="rounded bg-black/5 px-1.5 py-0.5 text-[10px] font-bold text-primaryDark">EXACT</span>
                 </div>
-                <div className="text-sm text-black/50">{ENTRY_COLORS[result.entryCode]?.name}</div>
+                <div className="text-sm text-black/50">{ENTRY_COLORS[result.entryCode as 'YW' | 'LG' | 'OR' | 'RD' | 'VT' | 'PK' | 'IV' | 'SB' | 'SV']?.name}</div>
               </div>
             </div>
 
