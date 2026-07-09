@@ -20,6 +20,9 @@
   --color-danger: #EF4444;
   --color-warning: #F2B93E;
   --color-info: #3FA9F5;
+
+  --color-cardIconBg: #F9EFCB;
+  --color-cardIcon: #C58B00;
 }
 
 :root {

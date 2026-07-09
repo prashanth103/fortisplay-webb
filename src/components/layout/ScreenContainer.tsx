@@ -14,7 +14,7 @@ export default function ScreenContainer({ children, className, wide = true, styl
     <main
       className={cn(
         'mx-auto w-full flex-1 px-4 py-4 lg:px-8 lg:py-8',
-        wide ? 'max-w-md lg:max-w-6xl' : 'max-w-md',
+        wide ? 'max-w-xxl lg:max-w-6xl' : 'max-w-md',
         className,
       )}
       style={style}

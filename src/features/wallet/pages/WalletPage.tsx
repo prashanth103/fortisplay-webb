@@ -14,8 +14,8 @@ export default function WalletPage() {
       <h1 className="text-2xl font-bold">Wallet</h1>
       <p className="mb-6 text-textSecondary">Today&apos;s cash flow</p>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+        <div className="xl:col-span-2">
           <Card className="mb-4 flex items-center gap-4 border-none bg-[#151A2E] p-5">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/15 text-primary">
               <TrendingUp size={22} />
@@ -43,7 +43,7 @@ export default function WalletPage() {
             </Card>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-2 xl:grid-cols-4 lg:gap-4">
             <StatTile icon={<ArrowDownRight size={18} />} value={WALLET_SUMMARY.received} label="Received" />
             <StatTile icon={<ArrowUpLeft size={18} />} value={WALLET_SUMMARY.remitted} label="Remitted" />
             <StatTile icon={<X size={18} />} value={WALLET_SUMMARY.cancelled} label="Cancel" />
@@ -98,14 +98,34 @@ export default function WalletPage() {
   );
 }
 
-function StatTile({ icon, value, label }: { icon: ReactNode; value: number; label: string }) {
+function StatTile({
+  icon,
+  value,
+  label,
+}: {
+  icon: ReactNode;
+  value: number;
+  label: string;
+}) {
   return (
-    <Card className="border-none bg-surfaceLight p-5 text-textOnLight">
-      <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primaryDark">
-        {icon}
+    <Card className="h-full border-none bg-surfaceLight p-4">
+      <div className="flex h-full items-center justify-between">
+        {/* Icon */}
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cardIconBg text-cardIcon">
+          {icon}
+        </div>
+
+        {/* Content */}
+        <div className="ml-4 flex-1 text-right">
+          <div className="text-lg font-bold leading-none text-textOnLight">
+            ₱ {value}
+          </div>
+
+          <div className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-black/40">
+            {label}
+          </div>
+        </div>
       </div>
-      <div className="text-2xl font-bold">₱ {value}</div>
-      <div className="mt-1 text-xs font-bold uppercase tracking-wide text-black/40">{label}</div>
     </Card>
   );
 }
