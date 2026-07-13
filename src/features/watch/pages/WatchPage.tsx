@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Clock, Eye, Maximize2, Play, Volume2 } from 'lucide-react';
 import ScreenContainer from '../../../components/layout/ScreenContainer';
 import StatusBadge from '../../../components/common/StatusBadge';
+import Text from '../../../components/ui/Text';
 import { RACES } from '../../home/mock';
 import { useCountdown } from '../../../hooks/useCountdown';
 import { cn } from '../../../utils/cn';
+import { typographyClasses } from '../../../constants/typography';
 
 const STATUS_MAP = { finished: 'ended', live: 'live', upcoming: 'upcoming' } as const;
 const BAR_LABEL = { finished: 'ENDED', live: 'LIVE', upcoming: 'UPCOMING' } as const;
@@ -21,45 +23,45 @@ export default function WatchPage() {
           <div className="relative aspect-video overflow-hidden rounded-2xl bg-[repeating-linear-gradient(135deg,#1c1c1f_0_10px,#141416_10px_20px)]">
             {active.status === 'live' && (
               <>
-                <div className="absolute left-3 top-3 flex items-center gap-1 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-danger">
+                <div className={cn('absolute left-3 top-3 flex items-center gap-1 rounded-full bg-black/70 px-3 py-1 text-danger', typographyClasses.labelMedium)}>
                   <span className="h-2 w-2 rounded-full bg-danger" /> LIVE
                 </div>
-                <div className="absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-white">
+                <div className={cn('absolute right-3 top-3 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-white', typographyClasses.labelMedium)}>
                   <Eye size={14} /> 1.2K watching
                 </div>
                 <button className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur">
                   <Play size={26} fill="currentColor" />
                 </button>
-                <p className="absolute bottom-14 left-1/2 -translate-x-1/2 text-xs font-bold uppercase tracking-widest text-white/40">
+                <Text as="p" variant="labelMedium" className="absolute bottom-14 left-1/2 -translate-x-1/2 uppercase tracking-widest text-white/40">
                   Live Race Feed
-                </p>
+                </Text>
               </>
             )}
 
             {active.status === 'upcoming' && (
               <>
-                <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-textSecondary">
+                <div className={cn('absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-textSecondary', typographyClasses.labelMedium)}>
                   <span className="h-2 w-2 rounded-full bg-textMuted" /> UPCOMING
                 </div>
                 <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3">
                   <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/10 text-white">
                     <Clock size={26} />
                   </span>
-                  <span className="text-lg font-bold text-white">Live in {countdown.label}</span>
+                  <Text variant="titleLarge" className="text-white">Live in {countdown.label}</Text>
                 </div>
               </>
             )}
 
             {active.status === 'finished' && (
               <>
-                <div className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-success">
+                <div className={cn('absolute left-3 top-3 flex items-center gap-1.5 rounded-full bg-black/70 px-3 py-1 text-success', typographyClasses.labelMedium)}>
                   <span className="h-2 w-2 rounded-full bg-success" /> ENDED
                 </div>
                 <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-3">
                   <button className="flex h-16 w-16 items-center justify-center rounded-full bg-success/20 text-success">
                     <Play size={26} fill="currentColor" />
                   </button>
-                  <span className="text-sm font-semibold text-white/70">Race ended · Replay available</span>
+                  <Text variant="labelLarge" className="text-white/70">Race ended · Replay available</Text>
                 </div>
               </>
             )}
@@ -76,26 +78,26 @@ export default function WatchPage() {
                   )}
                 />
               </div>
-              <span className="text-xs font-bold">{BAR_LABEL[active.status]}</span>
+              <Text variant="labelMedium">{BAR_LABEL[active.status]}</Text>
               <Maximize2 size={16} />
             </div>
           </div>
 
-          <h1 className="mt-5 text-2xl font-bold">
+          <Text as="h1" variant="headlineLarge" className="mt-5">
             {active.id} · {active.label}
-          </h1>
-          <p className="text-textSecondary">
+          </Text>
+          <Text as="p" variant="bodyMedium" className="text-textSecondary">
             Race {active.raceNo} ·{' '}
             {active.status === 'live'
               ? 'Streaming live now'
               : active.status === 'finished'
                 ? 'Race has ended'
                 : 'Starts soon'}
-          </p>
+          </Text>
         </div>
 
         <div>
-          <h2 className="mb-3 text-xs font-bold uppercase tracking-wide text-textMuted">Live &amp; Upcoming Races</h2>
+          <Text as="h2" variant="labelMedium" className="mb-3 uppercase text-textMuted">Live &amp; Upcoming Races</Text>
           <div className="flex flex-col gap-3">
             {RACES.map((race) => (
               <button
@@ -111,12 +113,12 @@ export default function WatchPage() {
                     <Play size={16} />
                   </span>
                   <div>
-                    <div className="font-bold">
+                    <Text as="div" variant="titleMedium">
                       {race.id} · {race.label}
-                    </div>
-                    <div className="text-xs text-textMuted">
+                    </Text>
+                    <Text as="div" variant="bodySmall" className="text-textMuted">
                       Race {race.raceNo} · {race.time}
-                    </div>
+                    </Text>
                   </div>
                 </div>
                 <StatusBadge status={STATUS_MAP[race.status]} />

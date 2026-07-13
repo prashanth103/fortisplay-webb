@@ -1,4 +1,5 @@
 import { cn } from '../../utils/cn';
+import Text from './Text';
 
 export interface TabItem {
   key: string;
@@ -27,10 +28,10 @@ export default function Tabs({ items, value, onChange, className }: Props) {
               active ? 'border-b-2 border-primary bg-primary/10' : 'border-b-2 border-transparent hover:bg-surface',
             )}
           >
-            <div className={cn('text-sm font-bold', active ? 'text-primary' : 'text-textPrimary')}>
+            <Text as="div" variant="titleSmall" className={active ? 'text-primary' : 'text-textPrimary'}>
               {item.label}
-            </div>
-            {item.sub && <div className="text-xs text-textMuted">{item.sub}</div>}
+            </Text>
+            {item.sub && <Text as="div" variant="bodySmall" className="text-textMuted">{item.sub}</Text>}
           </button>
         );
       })}

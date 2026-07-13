@@ -1,7 +1,9 @@
 import { Check, Clock } from 'lucide-react';
 import type { Race } from '../../types/betting';
 import { useCountdown } from '../../hooks/useCountdown';
+import { typographyClasses } from '../../constants/typography';
 import { cn } from '../../utils/cn';
+import Text from '../ui/Text';
 
 interface ChipProps {
   race: Race;
@@ -20,12 +22,13 @@ function RaceChip({ race, active, onClick }: ChipProps) {
         active ? 'bg-primary text-primaryText' : 'bg-surfaceAlt text-textPrimary hover:bg-surface',
       )}
     >
-      <div className="text-sm font-bold">
-        {race.id} <span className="font-normal opacity-70">· {race.time}</span>
-      </div>
+      <Text as="div" variant="titleSmall">
+        {race.id} <Text variant="bodyMedium" className="opacity-70">· {race.time}</Text>
+      </Text>
       <div
         className={cn(
-          'mt-1 flex items-center gap-1.5 text-xs font-bold',
+          'mt-1 flex items-center gap-1.5',
+          typographyClasses.labelMedium,
           active ? 'text-primaryText/80' : race.status === 'finished' ? 'text-success' : race.status === 'live' ? 'text-danger' : 'text-textMuted',
         )}
       >

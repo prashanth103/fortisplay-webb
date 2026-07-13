@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Lock, User } from 'lucide-react';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
+import Text from '../../../components/ui/Text';
 import { useAuth } from '../context/useAuth';
 import logo from '../../../assets/images/logo.png';
 
@@ -33,8 +34,8 @@ export default function LoginPage() {
             className="h-20 w-auto object-contain"
           />
         </div>
-        <h2 className="mt-1 text-2xl font-bold text-textPrimary">Welcome back</h2>
-        <p className="mt-1 text-sm text-textSecondary">Sign in to your gaming station</p>
+        <Text as="h2" variant="headlineLarge" className="mt-1 text-textPrimary">Welcome back</Text>
+        <Text as="p" variant="bodyMedium" className="mt-1 text-textSecondary">Sign in to your gaming station</Text>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -64,9 +65,9 @@ export default function LoginPage() {
         </Button>
       </form>
 
-      <p className="mt-10 text-center text-xs text-textMuted">
-        Powered by <span className="font-bold text-textSecondary">NorthAlley.</span>
-      </p>
+      <Text as="p" variant="bodySmall" className="mt-10 text-center text-textMuted">
+        Powered by <Text variant="labelMedium" className="text-textSecondary">NorthAlley.</Text>
+      </Text>
     </div>
   );
 }

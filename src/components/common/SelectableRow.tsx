@@ -2,6 +2,7 @@ import { Check, Plus } from 'lucide-react';
 import ColorBadge from './ColorBadge';
 import { cn } from '../../utils/cn';
 import type { Entry } from '../../types/betting';
+import Text from '../ui/Text';
 
 interface Props {
   entry: Entry;
@@ -20,7 +21,7 @@ export default function SelectableRow({ entry, selected, selectionIndex, onToggl
     >
       <div className="flex items-center gap-4">
         <ColorBadge code={entry.code} />
-        <span className="font-bold uppercase tracking-wide text-textPrimary">{entry.name}</span>
+        <Text variant="titleMedium" className="uppercase tracking-wide text-textPrimary">{entry.name}</Text>
       </div>
       <button
         onClick={onToggle}
@@ -34,7 +35,7 @@ export default function SelectableRow({ entry, selected, selectionIndex, onToggl
       >
         {selected ? (
           selectionIndex ? (
-            <span className="text-base font-bold">{selectionIndex}</span>
+            <Text variant="titleMedium">{selectionIndex}</Text>
           ) : (
             <Check size={20} strokeWidth={3} />
           )

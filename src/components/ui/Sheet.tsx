@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import Text from './Text';
 
 interface Props {
   open?: boolean;
@@ -20,7 +21,7 @@ export default function Sheet({ open, onClose = () => {}, title, badge, children
         {title && (
           <div className="flex items-center gap-2 border-b border-border px-5 py-4">
             {badge}
-            <h3 className="font-bold text-textPrimary">{title}</h3>
+            <Text as="h3" variant="titleMedium" className="text-textPrimary">{title}</Text>
           </div>
         )}
         <div className="p-5">{children}</div>
@@ -42,7 +43,7 @@ export default function Sheet({ open, onClose = () => {}, title, badge, children
         <div className="flex items-center justify-between px-5 py-4">
           <div className="flex items-center gap-2">
             {badge}
-            {title && <h3 className="font-bold text-textPrimary">{title}</h3>}
+            {title && <Text as="h3" variant="titleMedium" className="text-textPrimary">{title}</Text>}
           </div>
           <button
             onClick={onClose}

@@ -2,17 +2,19 @@ import { type ReactNode } from 'react';
 import { ArrowDownRight, ArrowUpLeft, CreditCard, Percent, TrendingUp, Wallet as WalletIcon, X } from 'lucide-react';
 import ScreenContainer from '../../../components/layout/ScreenContainer';
 import Card from '../../../components/ui/Card';
+import Text from '../../../components/ui/Text';
 import { useAuth } from '../../auth/context/useAuth';
 import { WALLET_SUMMARY, WALLET_TRANSACTIONS } from '../mock';
 import { cn } from '../../../utils/cn';
+import { typographyClasses } from '../../../constants/typography';
 
 export default function WalletPage() {
   const { user } = useAuth();
 
   return (
     <ScreenContainer>
-      <h1 className="text-2xl font-bold">Wallet</h1>
-      <p className="mb-6 text-textSecondary">Today&apos;s cash flow</p>
+      <Text as="h1" variant="headlineLarge">Wallet</Text>
+      <Text as="p" variant="bodyMedium" className="mb-6 text-textSecondary">Today&apos;s cash flow</Text>
 
       <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
         <div className="xl:col-span-2">
@@ -21,8 +23,8 @@ export default function WalletPage() {
               <TrendingUp size={22} />
             </div>
             <div>
-              <div className="text-xs font-bold uppercase tracking-wide text-textSecondary">Total Sales</div>
-              <div className="text-2xl font-bold">₱ {WALLET_SUMMARY.totalSales}</div>
+              <Text as="div" variant="labelMedium" className="uppercase text-textSecondary">Total Sales</Text>
+              <Text as="div" variant="headlineLarge">₱ {WALLET_SUMMARY.totalSales}</Text>
             </div>
           </Card>
 
@@ -31,15 +33,15 @@ export default function WalletPage() {
               <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-xl bg-black/10">
                 <WalletIcon size={20} />
               </div>
-              <div className="text-2xl font-bold">₱ {user?.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</div>
-              <div className="mt-1 text-xs font-bold uppercase tracking-wide">Cash In Hand</div>
+              <Text as="div" variant="headlineLarge">₱ {user?.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</Text>
+              <Text as="div" variant="labelMedium" className="mt-1 uppercase">Cash In Hand</Text>
             </Card>
             <Card className="p-5">
               <div className="mb-8 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/15 text-primary">
                 <Percent size={20} />
               </div>
-              <div className="text-2xl font-bold">₱ {WALLET_SUMMARY.commission.toFixed(2)}</div>
-              <div className="mt-1 text-xs font-bold uppercase tracking-wide text-textSecondary">My Commission</div>
+              <Text as="div" variant="headlineLarge">₱ {WALLET_SUMMARY.commission.toFixed(2)}</Text>
+              <Text as="div" variant="labelMedium" className="mt-1 uppercase text-textSecondary">My Commission</Text>
             </Card>
           </div>
 
@@ -50,16 +52,16 @@ export default function WalletPage() {
             <StatTile icon={<CreditCard size={18} />} value={WALLET_SUMMARY.payouts} label="Payouts" />
           </div>
 
-          <div className="mt-8 hidden items-center justify-between border-t border-border pt-5 text-xs text-textMuted lg:flex">
+          <div className={cn('mt-8 hidden items-center justify-between border-t border-border pt-5 text-textMuted lg:flex', typographyClasses.bodySmall)}>
             <span>Copyright Protected.</span>
             <span>
-              Powered by <span className="font-bold text-textSecondary">NorthAlley.</span>
+              Powered by <Text variant="labelMedium" className="text-textSecondary">NorthAlley.</Text>
             </span>
           </div>
         </div>
 
         <div>
-          <h2 className="mb-3 text-xs font-bold uppercase tracking-wide text-textMuted">Transaction History</h2>
+          <Text as="h2" variant="labelMedium" className="mb-3 uppercase text-textMuted">Transaction History</Text>
           <div className="flex flex-col gap-3">
             {WALLET_TRANSACTIONS.map((tx) => (
               <Card key={tx.id} className="flex items-center justify-between px-5 py-4">
@@ -73,25 +75,25 @@ export default function WalletPage() {
                     {tx.type === 'received' ? <ArrowDownRight size={18} /> : <ArrowUpLeft size={18} />}
                   </span>
                   <div>
-                    <div className="font-bold capitalize">{tx.type}</div>
-                    <div className="text-xs text-textMuted">
+                    <Text as="div" variant="titleMedium" className="capitalize">{tx.type}</Text>
+                    <Text as="div" variant="bodySmall" className="text-textMuted">
                       {tx.method} · {tx.time}
-                    </div>
+                    </Text>
                   </div>
                 </div>
-                <div className={cn('font-bold', tx.type === 'received' ? 'text-success' : 'text-danger')}>
+                <Text as="div" variant="titleMedium" className={tx.type === 'received' ? 'text-success' : 'text-danger'}>
                   {tx.type === 'received' ? '+' : '-'}₱{tx.amount}
-                </div>
+                </Text>
               </Card>
             ))}
           </div>
         </div>
       </div>
 
-      <div className="mt-8 flex items-center justify-between border-t border-border pt-5 text-xs text-textMuted lg:hidden">
+      <div className={cn('mt-8 flex items-center justify-between border-t border-border pt-5 text-textMuted lg:hidden', typographyClasses.bodySmall)}>
         <span>Copyright Protected.</span>
         <span>
-          Powered by <span className="font-bold text-textSecondary">NorthAlley.</span>
+          Powered by <Text variant="labelMedium" className="text-textSecondary">NorthAlley.</Text>
         </span>
       </div>
     </ScreenContainer>
@@ -110,20 +112,18 @@ function StatTile({
   return (
     <Card className="h-full border-none bg-surfaceLight p-4">
       <div className="flex h-full items-center justify-between">
-        {/* Icon */}
         <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cardIconBg text-cardIcon">
           {icon}
         </div>
 
-        {/* Content */}
         <div className="ml-4 flex-1 text-right">
-          <div className="text-lg font-bold leading-none text-textOnLight">
+          <Text as="div" variant="titleLarge" className="text-textOnLight">
             ₱ {value}
-          </div>
+          </Text>
 
-          <div className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-textMuted">
+          <Text as="div" variant="labelMedium" className="mt-1 uppercase text-textMuted">
             {label}
-          </div>
+          </Text>
         </div>
       </div>
     </Card>

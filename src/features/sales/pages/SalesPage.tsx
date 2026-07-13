@@ -5,6 +5,7 @@ import SearchInput from '../../../components/common/SearchInput';
 import TransactionRow, { TransactionHeader } from '../../../components/common/TransactionRow';
 import EmptyState from '../../../components/ui/EmptyState';
 import { SALES_SUMMARY, TRANSACTIONS } from '../mock';
+import Text from '../../../components/ui/Text';
 
 export default function SalesPage() {
   const [query, setQuery] = useState('');
@@ -23,8 +24,8 @@ export default function SalesPage() {
 
   return (
     <ScreenContainer>
-      <h1 className="text-2xl font-bold">Sales</h1>
-      <p className="mb-5 text-textSecondary">Today&apos;s transactions</p>
+      <Text as="h1" variant="headlineLarge">Sales</Text>
+      <Text as="p" variant="bodyMedium" className="mb-5 text-textSecondary">Today&apos;s transactions</Text>
 
       <div className="mb-5 grid grid-cols-2 gap-4 lg:max-w-md">
         <StatCard label="Total Sales" value={`₱ ${SALES_SUMMARY.totalSales}`} />

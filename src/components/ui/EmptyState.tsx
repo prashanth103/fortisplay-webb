@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '../../utils/cn';
+import Text from './Text';
 
 interface Props {
   badge?: ReactNode;
@@ -25,8 +26,8 @@ export default function EmptyState({ badge, icon, title, description, action, to
           {icon}
         </div>
       )}
-      <h3 className="text-xl font-bold text-textPrimary">{title}</h3>
-      {description && <p className="mt-2 max-w-sm text-sm text-textSecondary">{description}</p>}
+      <Text as="h3" variant="headlineMedium" className="text-textPrimary">{title}</Text>
+      {description && <Text as="p" variant="bodyMedium" className="mt-2 max-w-sm text-textSecondary">{description}</Text>}
       {action && <div className="mt-6">{action}</div>}
     </div>
   );

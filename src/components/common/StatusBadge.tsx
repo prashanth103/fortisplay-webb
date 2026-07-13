@@ -1,4 +1,5 @@
 import { CheckCircle2, Circle, Clock } from 'lucide-react';
+import { typographyClasses } from '../../constants/typography';
 import { cn } from '../../utils/cn';
 
 type Status = 'finished' | 'live' | 'upcoming' | 'ended';
@@ -13,7 +14,7 @@ const CONFIG: Record<Status, { label: string; className: string; icon?: 'check' 
 export default function StatusBadge({ status, className }: { status: Status; className?: string }) {
   const cfg = CONFIG[status];
   return (
-    <span className={cn('inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide', cfg.className, className)}>
+    <span className={cn('inline-flex items-center gap-1.5 uppercase', typographyClasses.labelMedium, cfg.className, className)}>
       {cfg.icon === 'check' && <CheckCircle2 size={14} />}
       {cfg.icon === 'clock' && <Clock size={14} />}
       {cfg.icon === 'dot' && <Circle size={8} className="fill-current" />}

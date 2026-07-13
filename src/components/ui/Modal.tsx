@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { X } from 'lucide-react';
 import { cn } from '../../utils/cn';
+import Text from './Text';
 
 interface Props {
   open: boolean;
@@ -25,7 +26,7 @@ export default function Modal({ open, onClose, title, children, footer, classNam
           )}
         >
           <div className="flex items-center justify-between px-6 pt-6">
-            <h2 className="text-xl font-bold">{title}</h2>
+            <Text as="h2" variant="headlineMedium">{title}</Text>
             <button
               onClick={onClose}
               className="flex h-9 w-9 items-center justify-center rounded-lg bg-surfaceAlt text-textPrimary hover:bg-border"

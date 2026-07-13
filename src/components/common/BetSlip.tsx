@@ -2,6 +2,7 @@ import { FileText, X } from 'lucide-react';
 import ColorBadge from './ColorBadge';
 import type { Entry } from '../../types/betting';
 import { POOLS, type PoolKey } from '../../constants/theme';
+import { typographyClasses, typographyLetterSpacing, typographyStyles } from '../../constants/typography';
 
 interface Props {
   pool: PoolKey;
@@ -15,7 +16,7 @@ interface Props {
 
 export function BetSlipBadge({ count }: { count: number }) {
   return (
-    <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-xs font-bold text-primaryText">
+    <span className={`flex h-6 w-6 items-center justify-center rounded-full bg-primary text-primaryText ${typographyClasses.labelMedium}`}>
       {count}
     </span>
   );
@@ -26,7 +27,6 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
   const complete = entries.length === poolMeta.picks;
 
   return (
-    /* Outer wrapper — floating card with yellow glow shadow */
     <div
       style={{
         borderTopLeftRadius: 18,
@@ -39,7 +39,6 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
           : '0 0 24px 2px rgba(242,185,62,0.18), 0 8px 32px rgba(0,0,0,0.45)',
       }}
     >
-      {/* ─── 1. Dark Header ─── */}
       <div
         style={{
           background: '#1B1B1B',
@@ -50,7 +49,6 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          {/* Icon in small rounded square */}
           <span
             style={{
               display: 'inline-flex',
@@ -64,15 +62,12 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
           >
             <FileText size={16} color="#9CA3AF" />
           </span>
-          {/* Title */}
-          <span style={{ fontWeight: 700, fontSize: 15, color: '#FFFFFF' }}>
+          <span style={{ ...typographyStyles.titleSmall, color: '#FFFFFF' }}>
             Bet Slip
           </span>
-          {/* Badge */}
           <BetSlipBadge count={entries.length} />
         </div>
 
-        {/* Close button */}
         {onClose && (
           <button
             onClick={onClose}
@@ -93,14 +88,12 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
         )}
       </div>
 
-      {/* ─── 2. White Content Container ─── */}
       <div
         style={{
           background: '#FFFFFF',
           padding: '0 16px 16px',
         }}
       >
-        {/* Pool label + STAKE */}
         <div
           style={{
             display: 'flex',
@@ -111,9 +104,8 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
         >
           <span
             style={{
-              fontSize: 11,
-              fontWeight: 800,
-              letterSpacing: '0.08em',
+              ...typographyStyles.labelSmall,
+              letterSpacing: typographyLetterSpacing.compactLabel,
               textTransform: 'uppercase' as const,
               color: '#D89A1F',
             }}
@@ -122,9 +114,8 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
           </span>
           <span
             style={{
-              fontSize: 10,
-              fontWeight: 700,
-              letterSpacing: '0.08em',
+              ...typographyStyles.labelSmall,
+              letterSpacing: typographyLetterSpacing.compactLabel,
               textTransform: 'uppercase' as const,
               color: '#B0A58A',
             }}
@@ -133,7 +124,6 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
           </span>
         </div>
 
-        {/* Entry rows */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {entries.map((entry) => (
             <div
@@ -146,12 +136,11 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 <ColorBadge code={entry.code} size="sm" />
-                <span style={{ fontSize: 14, fontWeight: 700, color: '#1A1500' }}>
+                <span style={{ ...typographyStyles.titleSmall, color: '#1A1500' }}>
                   {entry.name}
                 </span>
               </div>
 
-              {/* Stake input — yellow border */}
               <div
                 style={{
                   display: 'flex',
@@ -167,18 +156,17 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
                   flexShrink: 0,
                 }}
               >
-                <span style={{ color: '#B0A58A', fontSize: 14, fontWeight: 600 }}>₱</span>
+                <span style={{ ...typographyStyles.labelLarge, color: '#B0A58A' }}>₱</span>
                 <input
                   type="number"
                   min={1}
                   value={stake}
                   onChange={(e) => onStakeChange(Number(e.target.value) || 0)}
                   style={{
+                    ...typographyStyles.titleSmall,
                     width: '100%',
                     background: 'transparent',
                     textAlign: 'right' as const,
-                    fontSize: 14,
-                    fontWeight: 700,
                     color: '#1A1500',
                     outline: 'none',
                     border: 'none',
@@ -190,11 +178,11 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
           ))}
         </div>
 
-        {/* Place Bet button — inside white container */}
         <button
           disabled={!complete || stake <= 0}
           onClick={onPlaceBet}
           style={{
+            ...typographyStyles.titleSmall,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -205,8 +193,6 @@ export default function BetSlip({ pool, entries, stake, onStakeChange, onPlaceBe
             border: 'none',
             background: !complete || stake <= 0 ? '#E8D5A0' : '#F2B93E',
             color: '#1A1500',
-            fontSize: 14,
-            fontWeight: 700,
             cursor: !complete || stake <= 0 ? 'not-allowed' : 'pointer',
             opacity: !complete || stake <= 0 ? 0.5 : 1,
             fontFamily: 'inherit',

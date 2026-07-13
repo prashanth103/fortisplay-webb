@@ -1,5 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { NAVIGATION } from '../../constants/navigation';
+import { typographyClasses } from '../../constants/typography';
 import { cn } from '../../utils/cn';
 
 export default function BottomNav() {
@@ -12,7 +13,8 @@ export default function BottomNav() {
           end={path === '/'}
           className={({ isActive }) =>
             cn(
-              'flex flex-1 flex-col items-center gap-1 py-3 text-xs font-medium',
+              'flex flex-1 flex-col items-center gap-1 py-3',
+              typographyClasses.labelMedium,
               isActive ? 'text-primary' : 'text-textMuted',
             )
           }

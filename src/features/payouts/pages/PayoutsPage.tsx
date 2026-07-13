@@ -4,9 +4,12 @@ import ScreenContainer from '../../../components/layout/ScreenContainer';
 import Input from '../../../components/ui/Input';
 import Button from '../../../components/ui/Button';
 import Card from '../../../components/ui/Card';
+import Text from '../../../components/ui/Text';
 import ColorBadge from '../../../components/common/ColorBadge';
 import { findTicket, type PayoutTicket } from '../mock';
 import { ENTRY_COLORS } from '../../../constants/theme';
+import { typographyClasses } from '../../../constants/typography';
+import { cn } from '../../../utils/cn';
 
 export default function PayoutsPage() {
   const [ticketNo, setTicketNo] = useState('');
@@ -33,8 +36,8 @@ export default function PayoutsPage() {
 
   return (
     <ScreenContainer wide={false} className="lg:max-w-lg">
-      <h1 className="text-2xl font-bold">Payouts</h1>
-      <p className="mb-6 text-textSecondary">Scan or enter a ticket to verify</p>
+      <Text as="h1" variant="headlineLarge">Payouts</Text>
+      <Text as="p" variant="bodyMedium" className="mb-6 text-textSecondary">Scan or enter a ticket to verify</Text>
 
       {!result ? (
         <div>
@@ -54,13 +57,13 @@ export default function PayoutsPage() {
             </Button>
           </div>
 
-          <div className="my-5 flex items-center gap-3 text-xs font-bold uppercase tracking-wide text-textMuted">
+          <div className={cn('my-5 flex items-center gap-3 uppercase text-textMuted', typographyClasses.labelMedium)}>
             <span className="h-px flex-1 bg-border" /> Or enter ticket number <span className="h-px flex-1 bg-border" />
           </div>
 
           <form onSubmit={handleVerify} className="flex gap-3">
             <Input
-              icon={<span className="text-xs">#</span>}
+              icon={<Text variant="bodySmall">#</Text>}
               value={ticketNo}
               onChange={(e) => setTicketNo(e.target.value)}
               placeholder="e.g. 8266I50525"
@@ -69,25 +72,25 @@ export default function PayoutsPage() {
               Verify
             </Button>
           </form>
-          {error && <p className="mt-3 text-sm font-semibold text-danger">{error}</p>}
+          {error && <Text as="p" variant="labelLarge" className="mt-3 text-danger">{error}</Text>}
         </div>
       ) : (
         <>
           <Card className="border-none bg-surfaceLight p-0 text-textOnLight">
             <div className="flex items-center justify-between px-5 py-4">
-              <h2 className="text-lg font-bold">Ticket Details</h2>
+              <Text as="h2" variant="titleLarge">Ticket Details</Text>
               {result.status === 'won' && (
-                <span className="rounded-full bg-success/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-success">
+                <Text className="rounded-full bg-success/15 px-3 py-1 uppercase text-success" variant="labelMedium">
                   Won
-                </span>
+                </Text>
               )}
               {result.status === 'lost' && (
-                <span className="text-xs font-bold uppercase tracking-wide text-black/40">Lost</span>
+                <Text className="uppercase text-black/40" variant="labelMedium">Lost</Text>
               )}
               {result.status === 'pending' && (
-                <span className="rounded-full bg-warning/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-primaryDark">
+                <Text className="rounded-full bg-warning/15 px-3 py-1 uppercase text-primaryDark" variant="labelMedium">
                   Pending
-                </span>
+                </Text>
               )}
             </div>
 
@@ -97,45 +100,47 @@ export default function PayoutsPage() {
                 size="lg"
               />
               <div>
-                <div className="flex items-center gap-2 font-bold">
+                <Text as="div" variant="titleMedium" className="flex items-center gap-2">
                   {result.raceId} · {result.pool}
-                  <span className="rounded bg-black/5 px-1.5 py-0.5 text-[10px] font-bold text-primaryDark">EXACT</span>
-                </div>
-                <div className="text-sm text-black/50">{ENTRY_COLORS[result.entryCode as 'YW' | 'LG' | 'OR' | 'RD' | 'VT' | 'PK' | 'IV' | 'SB' | 'SV']?.name}</div>
+                  <Text className="rounded bg-black/5 px-1.5 py-0.5 text-primaryDark" variant="labelSmall">EXACT</Text>
+                </Text>
+                <Text as="div" variant="bodyMedium" className="text-black/50">
+                  {ENTRY_COLORS[result.entryCode as 'YW' | 'LG' | 'OR' | 'RD' | 'VT' | 'PK' | 'IV' | 'SB' | 'SV']?.name}
+                </Text>
               </div>
             </div>
 
-            <div className="space-y-2 border-t border-black/10 px-5 py-4 text-sm">
+            <div className={cn('space-y-2 border-t border-black/10 px-5 py-4', typographyClasses.bodyMedium)}>
               <div className="flex justify-between">
                 <span className="text-black/50">Ticket</span>
-                <span className="font-bold">No. {result.id}</span>
+                <Text variant="titleSmall">No. {result.id}</Text>
               </div>
               <div className="flex justify-between">
                 <span className="text-black/50">Date</span>
-                <span className="font-bold">{result.date}</span>
+                <Text variant="titleSmall">{result.date}</Text>
               </div>
               <div className="flex justify-between">
                 <span className="text-black/50">Bet Amount</span>
-                <span className="font-bold">₱{result.amount}</span>
+                <Text variant="titleSmall">₱{result.amount}</Text>
               </div>
             </div>
 
             <div className="p-5 pt-0">
               {result.status === 'won' && (
                 <div className="flex items-center justify-between rounded-xl bg-success/10 px-5 py-4">
-                  <span className="text-sm font-bold uppercase tracking-wide text-success">Payout Due</span>
-                  <span className="text-2xl font-bold text-success">₱ {result.payout}</span>
+                  <Text variant="titleSmall" className="uppercase tracking-wide text-success">Payout Due</Text>
+                  <Text variant="headlineLarge" className="text-success">₱ {result.payout}</Text>
                 </div>
               )}
               {result.status === 'lost' && (
-                <div className="rounded-xl bg-black/5 px-5 py-4 text-center font-semibold text-black/50">
-                  No payout — this ticket did not win.
-                </div>
+                <Text as="div" variant="labelLarge" className="rounded-xl bg-black/5 px-5 py-4 text-center text-black/50">
+                  No payout - this ticket did not win.
+                </Text>
               )}
               {result.status === 'pending' && (
-                <div className="rounded-xl bg-warning/10 px-5 py-4 text-center font-semibold text-primaryDark">
-                  Race not finished — payout pending result.
-                </div>
+                <Text as="div" variant="labelLarge" className="rounded-xl bg-warning/10 px-5 py-4 text-center text-primaryDark">
+                  Race not finished - payout pending result.
+                </Text>
               )}
             </div>
           </Card>

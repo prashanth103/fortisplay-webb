@@ -12,11 +12,14 @@ import Button from '../../../components/ui/Button';
 import Modal from '../../../components/ui/Modal';
 import Sheet from '../../../components/ui/Sheet';
 import EmptyState from '../../../components/ui/EmptyState';
+import Text from '../../../components/ui/Text';
 import TicketQR from '../../../components/common/TicketQR';
 import { ENTRIES, RACES } from '../mock';
 import { POOLS, type PoolKey } from '../../../constants/theme';
+import { typographyClasses } from '../../../constants/typography';
 import type { Entry } from '../../../types/betting';
 import TicketDivider from '../../../components/common/TicketDivider';
+import { cn } from '../../../utils/cn';
 
 function randomTicketNo() {
   return Math.random().toString(36).slice(2, 12).padStart(10, '0');
@@ -139,19 +142,19 @@ export default function HomePage() {
         <div className="flex-1 min-h-0 flex flex-col overflow-hidden mb-4">
           {activeRace.status === 'finished' && activeRace.results && (
             <Card className="flex-1 overflow-y-auto border-success/40">
-              <div className="border-b border-border px-5 py-4 text-center font-bold uppercase tracking-wide">
+              <Text as="div" variant="titleMedium" className="border-b border-border px-5 py-4 text-center uppercase tracking-wide">
                 {activeRace.id} Results
-              </div>
+              </Text>
               <div className="divide-y divide-border">
                 {activeRace.results.map((result) => (
                   <div key={result.pool} className="flex items-center gap-6 px-5 py-5">
-                    <span className="w-24 shrink-0 font-bold uppercase tracking-wide text-primary">
+                    <Text className="w-24 shrink-0 uppercase tracking-wide text-primary" variant="titleMedium">
                       {result.pool}
-                    </span>
+                    </Text>
                     <div className="flex gap-6">
                       {result.order.map((code, i) => (
                         <div key={code} className="flex flex-col items-center gap-1">
-                          <span className="text-xs font-bold text-textMuted">P{i + 1}</span>
+                          <Text variant="labelMedium" className="text-textMuted">P{i + 1}</Text>
                           <ColorBadge code={code} />
                         </div>
                       ))}
@@ -166,9 +169,9 @@ export default function HomePage() {
             <Card className="flex-1 overflow-y-auto border-danger/50">
               <EmptyState
                 badge={
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-danger/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-danger">
+                  <Text className="inline-flex items-center gap-1.5 rounded-full bg-danger/15 px-3 py-1 uppercase text-danger" variant="labelMedium">
                     <span className="h-1.5 w-1.5 rounded-full bg-danger" /> Live Now
-                  </span>
+                  </Text>
                 }
                 icon={<Lock size={28} />}
                 title="Bets Closed"
@@ -229,15 +232,15 @@ export default function HomePage() {
           }
         >
           <div className="flex flex-col items-center gap-4">
-            <span className="rounded-full bg-black px-4 py-1.5 text-sm font-bold text-primary">
+            <Text className="rounded-full bg-black px-4 py-1.5 text-primary" variant="titleSmall">
               {activeRace.id} · RACE {activeRace.raceNo}
-            </span>
+            </Text>
             <TicketQR seed={`${activeRace.id}-${pool}-${selections.map((e) => e.code).join('')}`} />
             <TicketDivider />
             <div className="flex w-full items-center justify-between text-center">
               <div>
-                <div className="text-sm font-bold text-primaryDark">{poolMeta.label}</div>
-                <div className="text-xs text-black/40">Pool</div>
+                <Text as="div" variant="titleSmall" className="text-primaryDark">{poolMeta.label}</Text>
+                <Text as="div" variant="bodySmall" className="text-black/40">Pool</Text>
               </div>
               <div className="flex flex-col items-center gap-1">
                 <div className="flex gap-1">
@@ -245,17 +248,17 @@ export default function HomePage() {
                     <ColorBadge key={e.code} code={e.code} size="lg" />
                   ))}
                 </div>
-                <div className="text-sm font-bold uppercase">{selections.map((e) => e.name).join(' / ')}</div>
+                <Text as="div" variant="titleSmall" className="uppercase">{selections.map((e) => e.name).join(' / ')}</Text>
               </div>
               <div>
-                <div className="text-sm font-bold">EXACT</div>
-                <div className="text-xs text-black/40">Order</div>
+                <Text as="div" variant="titleSmall">EXACT</Text>
+                <Text as="div" variant="bodySmall" className="text-black/40">Order</Text>
               </div>
             </div>
             <TicketDivider />
             <div className="flex w-full items-center justify-between">
-              <span className="font-bold">Total Amount</span>
-              <span className="rounded-lg border border-primary px-3 py-1 font-bold text-primaryDark">₱{stake}</span>
+              <Text variant="titleMedium">Total Amount</Text>
+              <Text className="rounded-lg border border-primary px-3 py-1 text-primaryDark" variant="titleMedium">₱{stake}</Text>
             </div>
           </div>
         </Modal>
@@ -277,11 +280,11 @@ export default function HomePage() {
         >
           {ticket && (
             <div className="flex flex-col items-center gap-4">
-              <span className="rounded-full bg-black px-4 py-1.5 text-xs font-bold text-primary">KB · FIXED ODDS</span>
+              <Text className="rounded-full bg-black px-4 py-1.5 text-primary" variant="labelMedium">KB · FIXED ODDS</Text>
               <TicketQR seed={ticket.id} />
-              <p className="text-sm text-black/60">No. {ticket.id}</p>
+              <Text as="p" variant="bodyMedium" className="text-black/60">No. {ticket.id}</Text>
               <TicketDivider />
-              <div className="w-full space-y-3 text-sm">
+              <div className={cn('w-full space-y-3', typographyClasses.bodyMedium)}>
                 <Row label="Date" value={new Date().toLocaleString()} />
                 <Row label="Pool" value={ticket.pool} />
                 <Row label="Order Preference" value="EXACT" />
@@ -289,12 +292,12 @@ export default function HomePage() {
                 <Row label="Tickets" value={ticket.entries.map((e) => e.code).join(', ')} />
               </div>
               <div className="flex w-full items-center justify-between border-t border-black/10 pt-4">
-                <span className="text-lg font-bold">TOTAL</span>
-                <span className="rounded-lg border border-primary px-3 py-1 text-lg font-bold text-primaryDark">
+                <Text variant="titleLarge">TOTAL</Text>
+                <Text className="rounded-lg border border-primary px-3 py-1 text-primaryDark" variant="titleLarge">
                   ₱{ticket.amount.toFixed(2)}
-                </span>
+                </Text>
               </div>
-              <p className="text-center text-xs text-black/40">Valid for 60 days. Ticket required for all payouts.</p>
+              <Text as="p" variant="bodySmall" className="text-center text-black/40">Valid for 60 days. Ticket required for all payouts.</Text>
             </div>
           )}
         </Modal>
@@ -310,19 +313,19 @@ export default function HomePage() {
         <div className="lg:col-span-2">
           {activeRace.status === 'finished' && activeRace.results && (
             <Card className="border-success/40">
-              <div className="border-b border-border px-5 py-4 text-center font-bold uppercase tracking-wide">
+              <Text as="div" variant="titleMedium" className="border-b border-border px-5 py-4 text-center uppercase tracking-wide">
                 {activeRace.id} Results
-              </div>
+              </Text>
               <div className="divide-y divide-border">
                 {activeRace.results.map((result) => (
                   <div key={result.pool} className="flex items-center gap-6 px-5 py-5">
-                    <span className="w-24 shrink-0 font-bold uppercase tracking-wide text-primary">
+                    <Text className="w-24 shrink-0 uppercase tracking-wide text-primary" variant="titleMedium">
                       {result.pool}
-                    </span>
+                    </Text>
                     <div className="flex gap-6">
                       {result.order.map((code, i) => (
                         <div key={code} className="flex flex-col items-center gap-1">
-                          <span className="text-xs font-bold text-textMuted">P{i + 1}</span>
+                          <Text variant="labelMedium" className="text-textMuted">P{i + 1}</Text>
                           <ColorBadge code={code} />
                         </div>
                       ))}
@@ -337,9 +340,9 @@ export default function HomePage() {
             <Card className="border-danger/50">
               <EmptyState
                 badge={
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-danger/15 px-3 py-1 text-xs font-bold uppercase tracking-wide text-danger">
+                  <Text className="inline-flex items-center gap-1.5 rounded-full bg-danger/15 px-3 py-1 uppercase text-danger" variant="labelMedium">
                     <span className="h-1.5 w-1.5 rounded-full bg-danger" /> Live Now
-                  </span>
+                  </Text>
                 }
                 icon={<Lock size={28} />}
                 title="Bets Closed"
@@ -410,15 +413,15 @@ export default function HomePage() {
         }
       >
         <div className="flex flex-col items-center gap-4">
-          <span className="rounded-full bg-black px-4 py-1.5 text-sm font-bold text-primary">
+          <Text className="rounded-full bg-black px-4 py-1.5 text-primary" variant="titleSmall">
             {activeRace.id} · RACE {activeRace.raceNo}
-          </span>
+          </Text>
           <TicketQR seed={`${activeRace.id}-${pool}-${selections.map((e) => e.code).join('')}`} />
           <TicketDivider />
           <div className="flex w-full items-center justify-between text-center">
             <div>
-              <div className="text-sm font-bold text-primaryDark">{poolMeta.label}</div>
-              <div className="text-xs text-black/40">Pool</div>
+              <Text as="div" variant="titleSmall" className="text-primaryDark">{poolMeta.label}</Text>
+              <Text as="div" variant="bodySmall" className="text-black/40">Pool</Text>
             </div>
             <div className="flex flex-col items-center gap-1">
               <div className="flex gap-1">
@@ -426,17 +429,17 @@ export default function HomePage() {
                   <ColorBadge key={e.code} code={e.code} size="lg" />
                 ))}
               </div>
-              <div className="text-sm font-bold uppercase">{selections.map((e) => e.name).join(' / ')}</div>
+              <Text as="div" variant="titleSmall" className="uppercase">{selections.map((e) => e.name).join(' / ')}</Text>
             </div>
             <div>
-              <div className="text-sm font-bold">EXACT</div>
-              <div className="text-xs text-black/40">Order</div>
+              <Text as="div" variant="titleSmall">EXACT</Text>
+              <Text as="div" variant="bodySmall" className="text-black/40">Order</Text>
             </div>
           </div>
           <TicketDivider />
           <div className="flex w-full items-center justify-between">
-            <span className="font-bold">Total Amount</span>
-            <span className="rounded-lg border border-primary px-3 py-1 font-bold text-primaryDark">₱{stake}</span>
+            <Text variant="titleMedium">Total Amount</Text>
+            <Text className="rounded-lg border border-primary px-3 py-1 text-primaryDark" variant="titleMedium">₱{stake}</Text>
           </div>
         </div>
       </Modal>
@@ -458,11 +461,11 @@ export default function HomePage() {
       >
         {ticket && (
           <div className="flex flex-col items-center gap-4">
-            <span className="rounded-full bg-black px-4 py-1.5 text-xs font-bold text-primary">KB · FIXED ODDS</span>
+            <Text className="rounded-full bg-black px-4 py-1.5 text-primary" variant="labelMedium">KB · FIXED ODDS</Text>
             <TicketQR seed={ticket.id} />
-            <p className="text-sm text-black/60">No. {ticket.id}</p>
+            <Text as="p" variant="bodyMedium" className="text-black/60">No. {ticket.id}</Text>
             <TicketDivider />
-            <div className="w-full space-y-3 text-sm">
+            <div className={cn('w-full space-y-3', typographyClasses.bodyMedium)}>
               <Row label="Date" value={new Date().toLocaleString()} />
               <Row label="Pool" value={ticket.pool} />
               <Row label="Order Preference" value="EXACT" />
@@ -470,12 +473,12 @@ export default function HomePage() {
               <Row label="Tickets" value={ticket.entries.map((e) => e.code).join(', ')} />
             </div>
             <div className="flex w-full items-center justify-between border-t border-black/10 pt-4">
-              <span className="text-lg font-bold">TOTAL</span>
-              <span className="rounded-lg border border-primary px-3 py-1 text-lg font-bold text-primaryDark">
+              <Text variant="titleLarge">TOTAL</Text>
+              <Text className="rounded-lg border border-primary px-3 py-1 text-primaryDark" variant="titleLarge">
                 ₱{ticket.amount.toFixed(2)}
-              </span>
+              </Text>
             </div>
-            <p className="text-center text-xs text-black/40">Valid for 60 days. Ticket required for all payouts.</p>
+            <Text as="p" variant="bodySmall" className="text-center text-black/40">Valid for 60 days. Ticket required for all payouts.</Text>
           </div>
         )}
       </Modal>
@@ -487,7 +490,7 @@ function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between">
       <span className="text-black/50">{label}</span>
-      <span className="font-bold">{value}</span>
+      <Text variant="titleSmall">{value}</Text>
     </div>
   );
 }

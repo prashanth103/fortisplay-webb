@@ -1,4 +1,5 @@
 import { ENTRY_COLORS, type EntryColorCode } from '../../constants/theme';
+import { compactTypographyClasses, typographyClasses } from '../../constants/typography';
 import { cn } from '../../utils/cn';
 
 interface Props {
@@ -11,17 +12,17 @@ const SIZES = {
   sm: {
     outer: 'h-8 w-8',
     inner: 'h-5 w-5',
-    text: 'text-[8px]',
+    text: compactTypographyClasses.badgeSmall,
   },
   md: {
     outer: 'h-12 w-12',
     inner: 'h-8 w-8',
-    text: 'text-[11px]',
+    text: compactTypographyClasses.badgeMedium,
   },
   lg: {
     outer: 'h-14 w-14',
     inner: 'h-10 w-10',
-    text: 'text-sm',
+    text: typographyClasses.titleSmall,
   },
 };
 
@@ -53,7 +54,7 @@ export default function ColorBadge({
     >
       <div
         className={cn(
-          'flex items-center justify-center rounded-full bg-white font-black shadow-[inset_0_1px_3px_rgba(0,0,0,0.12)]',
+          'flex items-center justify-center rounded-full bg-white shadow-[inset_0_1px_3px_rgba(0,0,0,0.12)]',
           s.inner,
           s.text,
           'dark' in entry && entry.dark ? 'text-neutral-700' : 'text-neutral-900',

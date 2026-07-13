@@ -1,5 +1,7 @@
 import type { InputHTMLAttributes, ReactNode } from 'react';
+import { typographyClasses } from '../../constants/typography';
 import { cn } from '../../utils/cn';
+import Text from './Text';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   icon?: ReactNode;
@@ -12,7 +14,7 @@ export default function Input({ icon, rightSlot, label, error, className, id, ..
   return (
     <div className="w-full">
       {label && (
-        <label htmlFor={id} className="mb-2 block text-sm font-bold text-textPrimary">
+        <label htmlFor={id} className={cn('mb-2 block text-textPrimary', typographyClasses.titleSmall)}>
           {label}
         </label>
       )}
@@ -27,14 +29,15 @@ export default function Input({ icon, rightSlot, label, error, className, id, ..
         <input
           id={id}
           className={cn(
-            'h-full w-full bg-transparent text-base text-textPrimary placeholder:text-textMuted focus:outline-none',
+            'h-full w-full bg-transparent text-textPrimary placeholder:text-textMuted focus:outline-none',
+            typographyClasses.bodyLarge,
             className,
           )}
           {...rest}
         />
         {rightSlot}
       </div>
-      {error && <p className="mt-1.5 text-xs text-danger">{error}</p>}
+      {error && <Text as="p" variant="bodySmall" className="mt-1.5 text-danger">{error}</Text>}
     </div>
   );
 }

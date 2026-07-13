@@ -7,6 +7,9 @@ import Modal from '../ui/Modal';
 import Input from '../ui/Input';
 import Button from '../ui/Button';
 import logo from '../../assets/images/logo.png';
+import { typographyClasses } from '../../constants/typography';
+import { cn } from '../../utils/cn';
+import Text from '../ui/Text';
 
 // Demo-only display name (the app has no separate "name" field yet — only an SO ID).
 const SO_DISPLAY_NAME = 'SO name displayed';
@@ -65,7 +68,7 @@ export default function TopBar() {
           {theme === 'dark' ? <Sun size={18} /> : theme === 'light' ? <Moon size={18} /> : <Palette size={18} />}
         </button>
 
-        <div className="flex h-10 items-center gap-2 rounded-full bg-primary px-4 font-bold text-primaryText">
+        <div className={cn('flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-primaryText', typographyClasses.titleMedium)}>
           <WalletIcon size={16} />
           <span>₱ {user?.balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
         </div>
@@ -97,8 +100,8 @@ export default function TopBar() {
               <div className="fixed inset-0 z-10" onClick={() => setOpen(false)} />
               <div className="absolute right-0 top-12 z-20 w-60 rounded-xl border border-border bg-surfaceAlt p-2 shadow-xl">
                 <div className="px-3 py-3">
-                  <div className="font-bold text-textPrimary">{SO_DISPLAY_NAME}</div>
-                  <div className="text-xs text-textMuted">SO ID {user?.soId}</div>
+                  <Text as="div" variant="titleMedium" className="text-textPrimary">{SO_DISPLAY_NAME}</Text>
+                  <Text as="div" variant="bodySmall" className="text-textMuted">SO ID {user?.soId}</Text>
                 </div>
                 <div className="my-1 h-px bg-border" />
                 <button
@@ -106,7 +109,7 @@ export default function TopBar() {
                     setOpen(false);
                     setChangePwOpen(true);
                   }}
-                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-textPrimary hover:bg-surface"
+                  className={cn('flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-textPrimary hover:bg-surface', typographyClasses.labelLarge)}
                 >
                   <Lock size={16} /> Change Password
                 </button>
@@ -116,7 +119,7 @@ export default function TopBar() {
                     logout();
                     navigate('/login');
                   }}
-                  className="flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-sm font-semibold text-danger hover:bg-danger/10"
+                  className={cn('flex w-full items-center gap-2 rounded-lg px-3 py-2.5 text-left text-danger hover:bg-danger/10', typographyClasses.labelLarge)}
                 >
                   <LogOut size={16} /> Logout
                 </button>
@@ -153,7 +156,7 @@ export default function TopBar() {
             value={confirmPw}
             onChange={(e) => setConfirmPw(e.target.value)}
           />
-          {pwError && <p className="text-sm font-semibold text-danger">{pwError}</p>}
+          {pwError && <Text as="p" variant="labelLarge" className="text-danger">{pwError}</Text>}
           <div className="flex gap-3">
             <Button type="button" variant="outline" fullWidth onClick={closeChangePw}>
               Cancel

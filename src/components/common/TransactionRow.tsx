@@ -1,10 +1,13 @@
 import ColorBadge from './ColorBadge';
 import Card from '../ui/Card';
 import type { Transaction } from '../../types/betting';
+import { typographyClasses } from '../../constants/typography';
+import { cn } from '../../utils/cn';
+import Text from '../ui/Text';
 
 export function TransactionHeader() {
   return (
-    <div className="hidden grid-cols-[auto_1fr_auto_auto] gap-4 px-5 py-2 text-xs font-bold uppercase tracking-wide text-textMuted lg:grid">
+    <div className={cn('hidden grid-cols-[auto_1fr_auto_auto] gap-4 px-5 py-2 uppercase text-textMuted lg:grid', typographyClasses.labelMedium)}>
       <span>Entry</span>
       <span>Race · Pool</span>
       <span>Ticket / Time</span>
@@ -19,25 +22,25 @@ export default function TransactionRow({ tx }: { tx: Transaction }) {
       <div className="flex items-center gap-4">
         <ColorBadge code={tx.entryCode} />
         <div className="lg:hidden">
-          <div className="flex items-center gap-2 font-bold text-textPrimary">
+          <Text as="div" variant="titleMedium" className="flex items-center gap-2 text-textPrimary">
             {tx.raceId} · {tx.pool}
-            <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold text-primaryDark">{tx.order}</span>
-          </div>
-          <div className="text-xs text-textMuted">
+            <Text variant="labelSmall" className="rounded bg-primary/10 px-1.5 py-0.5 text-primaryDark">{tx.order}</Text>
+          </Text>
+          <Text as="div" variant="bodySmall" className="text-textMuted">
             No. {tx.id} · {tx.time}
-          </div>
+          </Text>
         </div>
       </div>
 
-      <div className="hidden items-center gap-2 font-bold text-textPrimary lg:flex">
+      <Text as="div" variant="titleMedium" className="hidden items-center gap-2 text-textPrimary lg:flex">
         {tx.raceId} · {tx.pool}
-        <span className="rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold text-primaryDark">{tx.order}</span>
-      </div>
-      <div className="hidden text-sm text-textMuted lg:block">
+        <Text variant="labelSmall" className="rounded bg-primary/10 px-1.5 py-0.5 text-primaryDark">{tx.order}</Text>
+      </Text>
+      <Text as="div" variant="bodyMedium" className="hidden text-textMuted lg:block">
         No. {tx.id} · {tx.time}
-      </div>
+      </Text>
 
-      <div className="font-bold text-textPrimary lg:text-right">₱{tx.amount}</div>
+      <Text as="div" variant="titleMedium" className="text-textPrimary lg:text-right">₱{tx.amount}</Text>
     </Card>
   );
 }

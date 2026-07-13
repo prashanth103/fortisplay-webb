@@ -1,4 +1,5 @@
 import Card from '../ui/Card';
+import Text from '../ui/Text';
 
 interface Props {
   label: string;
@@ -8,8 +9,8 @@ interface Props {
 export default function StatCard({ label, value }: Props) {
   return (
     <Card className="px-5 py-4">
-      <div className="text-xs font-medium uppercase tracking-wide text-textSecondary">{label}</div>
-      <div className="mt-1 text-2xl font-bold text-textPrimary">{value}</div>
+      <Text as="div" variant="labelMedium" className="uppercase text-textSecondary">{label}</Text>
+      <Text as="div" variant="headlineLarge" className="mt-1 text-textPrimary">{value}</Text>
     </Card>
   );
 }

@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { typographyClasses } from '../../constants/typography';
 import { cn } from '../../utils/cn';
 
 type Variant = 'primary' | 'secondary' | 'outline' | 'danger' | 'ghost';
@@ -20,9 +21,15 @@ const VARIANTS: Record<Variant, string> = {
 };
 
 const SIZES: Record<Size, string> = {
-  sm: 'h-9 px-3 text-sm',
-  md: 'h-12 px-4 text-sm',
-  lg: 'h-14 px-6 text-base',
+  sm: 'h-9 px-3',
+  md: 'h-12 px-4',
+  lg: 'h-14 px-6',
+};
+
+const SIZE_TYPOGRAPHY: Record<Size, string> = {
+  sm: typographyClasses.labelLarge,
+  md: typographyClasses.labelLarge,
+  lg: typographyClasses.titleMedium,
 };
 
 export default function Button({
@@ -37,9 +44,10 @@ export default function Button({
   return (
     <button
       className={cn(
-        'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-colors',
+        'inline-flex items-center justify-center gap-2 rounded-xl transition-colors',
         VARIANTS[variant],
         SIZES[size],
+        SIZE_TYPOGRAPHY[size],
         fullWidth && 'w-full',
         className,
       )}
