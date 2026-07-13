@@ -68,6 +68,46 @@ html[data-theme="light"] {
   --color-cardIcon: #B77900;
 }
 
+html[data-theme="red"] {
+  --color-background: #1B0F0F;
+  --color-surface: #261414;
+  --color-surfaceAlt: #311818;
+  --color-surfaceLight: #FFFFFF;
+  --color-border: #5E2A2A;
+
+  --color-textPrimary: #FFF5F5;
+  --color-textSecondary: #F2B4B4;
+  --color-textMuted: #C98C8C;
+  --color-textOnLight: #1B0F0F;
+
+  --color-primary: #FF5F5F;
+  --color-primaryDark: #CC3F3F;
+  --color-primaryText: #1A0303;
+
+  --color-cardIconBg: #FFE1E1;
+  --color-cardIcon: #B63A3A;
+}
+
+html[data-theme="green"] {
+  --color-background: #07120D;
+  --color-surface: #112117;
+  --color-surfaceAlt: #162D21;
+  --color-surfaceLight: #FFFFFF;
+  --color-border: #25553B;
+
+  --color-textPrimary: #F2FFF7;
+  --color-textSecondary: #A9D9BB;
+  --color-textMuted: #7BB08E;
+  --color-textOnLight: #07120D;
+
+  --color-primary: #2ECC71;
+  --color-primaryDark: #1F9F57;
+  --color-primaryText: #04110B;
+
+  --color-cardIconBg: #D8F7E2;
+  --color-cardIcon: #2D8B4D;
+}
+
 body {
   background-color: var(--color-background);
 }

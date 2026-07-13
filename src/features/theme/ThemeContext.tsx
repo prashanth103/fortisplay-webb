@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
-type Theme = 'dark' | 'light';
+type Theme = 'dark' | 'light' | 'red' | 'green';
 
 interface ThemeContextValue {
   theme: Theme;
@@ -8,11 +8,14 @@ interface ThemeContextValue {
 }
 
 const STORAGE_KEY = 'fortisplay-theme';
+const THEME_ORDER: Theme[] = ['dark', 'light', 'red', 'green'];
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 function getInitialTheme(): Theme {
   if (typeof window === 'undefined') return 'dark';
-  return window.localStorage.getItem(STORAGE_KEY) === 'light' ? 'light' : 'dark';
+
+  const savedTheme = window.localStorage.getItem(STORAGE_KEY);
+  return savedTheme && THEME_ORDER.includes(savedTheme as Theme) ? (savedTheme as Theme) : 'dark';
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -26,7 +29,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   const value = useMemo(
     () => ({
       theme,
-      toggleTheme: () => setTheme((current) => (current === 'dark' ? 'light' : 'dark')),
+      toggleTheme: () =>
+        setTheme((current) => {
+          const currentIndex = THEME_ORDER.indexOf(current);
+          const nextIndex = (currentIndex + 1) % THEME_ORDER.length;
+          return THEME_ORDER[nextIndex];
+        }),
     }),
     [theme],
   );

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, Lock, LogOut, Moon, Sun, User, Wallet as WalletIcon } from 'lucide-react';
+import { ChevronDown, Lock, LogOut, Moon, Palette, Sun, User, Wallet as WalletIcon } from 'lucide-react';
 import { useAuth } from '../../features/auth/context/useAuth';
 import { useTheme } from '../../features/theme/ThemeContext';
 import Modal from '../ui/Modal';
@@ -21,6 +21,7 @@ export default function TopBar() {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const nextTheme = theme === 'dark' ? 'light' : theme === 'light' ? 'red' : theme === 'red' ? 'green' : 'dark';
 
   const closeChangePw = () => {
     setChangePwOpen(false);
@@ -58,10 +59,10 @@ export default function TopBar() {
           type="button"
           onClick={toggleTheme}
           className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-surfaceAlt text-textPrimary shadow-sm hover:bg-surface"
-          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-          title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          aria-label={`Switch to ${nextTheme} theme`}
+          title={`Switch to ${nextTheme} theme`}
         >
-          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          {theme === 'dark' ? <Sun size={18} /> : theme === 'light' ? <Moon size={18} /> : <Palette size={18} />}
         </button>
 
         <div className="flex h-10 items-center gap-2 rounded-full bg-primary px-4 font-bold text-primaryText">
