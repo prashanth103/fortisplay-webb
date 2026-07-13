@@ -1,0 +1,157 @@
+<mxfile host="app.diagrams.net" modified="2026-07-09T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="frontend-architecture" name="Frontend Architecture">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1400" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="FortisPlay Web Frontend Architecture" style="text;html=1;strokeColor=none;fillColor=none;fontSize=26;fontStyle=1;fontColor=#111827;align=center;" vertex="1" parent="1">
+          <mxGeometry x="380" y="20" width="640" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="browser" value="Browser / PWA Client&#xa;User opens app" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2FE;strokeColor=#0284C7;fontColor=#0F172A;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="100" width="210" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="vite" value="Vite + React 19 + TypeScript&#xa;Build, dev server, HMR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#D97706;fontColor=#111827;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="100" width="240" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="main" value="src/main.tsx&#xa;createRoot()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FDE68A;strokeColor=#D97706;fontColor=#111827;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="680" y="100" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="theme" value="ThemeProvider&#xa;features/theme/ThemeContext.tsx&#xa;localStorage + html[data-theme]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DCFCE7;strokeColor=#16A34A;fontColor=#111827;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="970" y="100" width="270" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="app" value="App.tsx&#xa;Root app component" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#111827;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="250" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="auth" value="AuthProvider&#xa;features/auth/context&#xa;sessionStorage demo auth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F3E8FF;strokeColor=#9333EA;fontColor=#111827;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="360" y="240" width="240" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="query" value="Future: TanStack Query&#xa;QueryClientProvider&#xa;Server-state cache, loading, errors" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#111827;fontSize=14;fontStyle=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="235" width="260" height="100" as="geometry" />
+        </mxCell>
+
+        <mxCell id="router" value="AppRouter&#xa;React Router DOM v7&#xa;BrowserRouter + Routes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DBEAFE;strokeColor=#2563EB;fontColor=#111827;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="1020" y="245" width="240" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="routesGroup" value="Routes" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontColor=#111827;fontSize=16;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="70" y="410" width="1190" height="190" as="geometry" />
+        </mxCell>
+
+        <mxCell id="public" value="Public Route&#xa;/login&#xa;AuthLayout + LoginPage" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=14;" vertex="1" parent="routesGroup">
+          <mxGeometry x="30" y="55" width="230" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="protected" value="ProtectedRoute&#xa;requires AuthProvider user" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=14;" vertex="1" parent="routesGroup">
+          <mxGeometry x="320" y="55" width="230" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="mainLayout" value="MainLayout&#xa;TopBar + Sidebar + BottomNav&#xa;Outlet renders active page" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=14;" vertex="1" parent="routesGroup">
+          <mxGeometry x="610" y="45" width="250" height="105" as="geometry" />
+        </mxCell>
+
+        <mxCell id="featureRoutes" value="Feature Routes&#xa;/ Home&#xa;/watch Watch&#xa;/sales Sales&#xa;/payouts Payouts&#xa;/wallet Wallet" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=14;" vertex="1" parent="routesGroup">
+          <mxGeometry x="930" y="35" width="220" height="125" as="geometry" />
+        </mxCell>
+
+        <mxCell id="featuresGroup" value="Feature Modules" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontColor=#111827;fontSize=16;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="70" y="660" width="620" height="250" as="geometry" />
+        </mxCell>
+
+        <mxCell id="home" value="Home Feature&#xa;Betting flow&#xa;RaceTabs, BetSlip, Ticket modals&#xa;features/home/mock.ts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=13;" vertex="1" parent="featuresGroup">
+          <mxGeometry x="30" y="55" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="payouts" value="Payouts Feature&#xa;Ticket verify / payout result&#xa;features/payouts/mock.ts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=13;" vertex="1" parent="featuresGroup">
+          <mxGeometry x="330" y="55" width="250" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="otherFeatures" value="Watch, Sales, Wallet&#xa;Page UI + feature mock data&#xa;Shared components and hooks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=13;" vertex="1" parent="featuresGroup">
+          <mxGeometry x="170" y="160" width="280" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="sharedGroup" value="Shared Frontend Foundation" style="swimlane;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontColor=#111827;fontSize=16;fontStyle=1;startSize=30;" vertex="1" parent="1">
+          <mxGeometry x="760" y="660" width="500" height="250" as="geometry" />
+        </mxCell>
+
+        <mxCell id="ui" value="components/ui&#xa;Button, Input, Card, Modal, Tabs, Sheet, Loader" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=13;" vertex="1" parent="sharedGroup">
+          <mxGeometry x="35" y="55" width="200" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="common" value="components/common&#xa;TopBar, Sidebar, BottomNav, RaceTabs, BetSlip, TicketQR" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=13;" vertex="1" parent="sharedGroup">
+          <mxGeometry x="265" y="55" width="200" height="85" as="geometry" />
+        </mxCell>
+
+        <mxCell id="constants" value="constants + hooks + types + utils&#xa;theme tokens, navigation, countdown, cn()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#CBD5E1;fontColor=#111827;fontSize=13;" vertex="1" parent="sharedGroup">
+          <mxGeometry x="130" y="160" width="250" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="api" value="Future API Layer&#xa;lib/apiClient.ts&#xa;feature/api.ts + feature/queries.ts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE4E6;strokeColor=#E11D48;fontColor=#111827;fontSize=14;fontStyle=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="995" y="455" width="250" height="90" as="geometry" />
+        </mxCell>
+
+        <mxCell id="backend" value="Future Backend APIs&#xa;Auth, races, bets, payouts, wallet, sales" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontColor=#111827;fontSize=14;fontStyle=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="995" y="565" width="250" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="1" source="browser" target="vite">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="1" source="vite" target="main">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="1" source="main" target="theme">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="1" source="theme" target="app">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1105" y="215" />
+              <mxPoint x="180" y="215" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="1" source="app" target="auth">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e6" value="future provider" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#E11D48;dashed=1;fontColor=#E11D48;" edge="1" parent="1" source="auth" target="query">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="1" source="query" target="router">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="1" source="router" target="routesGroup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="routesGroup" source="public" target="protected">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="routesGroup" source="protected" target="mainLayout">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;" edge="1" parent="routesGroup" source="mainLayout" target="featureRoutes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" value="render pages" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;fontColor=#334155;" edge="1" parent="1" source="routesGroup" target="featuresGroup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" value="compose" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#334155;fontColor=#334155;" edge="1" parent="1" source="featuresGroup" target="sharedGroup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" value="future queries" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#E11D48;dashed=1;fontColor=#E11D48;" edge="1" parent="1" source="query" target="api">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" value="HTTP/JSON" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=block;strokeColor=#E11D48;dashed=1;fontColor=#E11D48;" edge="1" parent="1" source="api" target="backend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
