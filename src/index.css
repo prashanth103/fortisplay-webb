@@ -28,6 +28,9 @@
 :root {
   font-family: Inter, system-ui, sans-serif;
 
+  /* Matches the black modal backdrop over the active page background. */
+  --ticket-divider-cutout: color-mix(in srgb, var(--color-background) 30%, #000);
+
   --color-primary: #F2B93E;
   --color-primaryDark: #D89A1F;
   --color-primaryText: #1A1500;
